@@ -99,7 +99,21 @@ public class HRController {
     
     
     @RequestMapping(value="/dashboard", method=RequestMethod.GET)
-    public String dashboard(){
+    public String dashboard(Model model){
+
+    	long totalCandidates = fresherProfileRepository.count();
+
+    	long selectedCandidates = fresherProfileRepository.countByStatus(FresherStatus.SELECTED);
+
+    	long inProgress = fresherProfileRepository.countByStatus(FresherStatus.IN_PROGRESS);
+
+    	//long rejected = fresherProfileRepository.countByStatus(FresherStatus.);
+
+        model.addAttribute("totalCandidates", totalCandidates);
+        model.addAttribute("selectedCandidates", selectedCandidates);
+        model.addAttribute("inProgress", inProgress);
+      //  model.addAttribute("rejected", rejected);
+
         return "hr/dashboard";
     }
     

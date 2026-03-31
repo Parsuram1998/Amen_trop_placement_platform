@@ -64,7 +64,7 @@ public class FresherProfileServiceImpl implements FresherProfileService {
         profile.setPreferredLocations(preferredLocations);
         profile.setReadyForBond(readyForBond);
         profile.setStatus(FresherStatus.IN_PROGRESS);
-
+        profile.setCertificateApproved(false);
         try {
 
             String resumeFile = fileUploadServices.saveFile(resume);

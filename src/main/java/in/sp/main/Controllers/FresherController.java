@@ -90,44 +90,67 @@ public class FresherController {
 
         return "fresher/dashboard";
     }
-   @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public String profileForm() {
-       return "fresher/profile";
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String profileForm(HttpSession session) {
+
+        Long userId = (Long) session.getAttribute("USER_ID");
+
+        if (userId == null) {
+            return "redirect:/auth/login";
+        }
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        FresherProfile profile = fresherProfileRepository.findByUser(user).orElse(null);
+
+        // ✅ IF PROFILE EXISTS → VIEW PAGE
+        if (profile != null) {
+            return "redirect:/fresher/viewprofile";
+        }
+
+        // ✅ ELSE → CREATE PROFILE PAGE
+        return "fresher/profile";
     }
 
-    @RequestMapping(value = "/profile", method = RequestMethod.POST)
-    public String saveProfile(
-            HttpSession session,
-            @RequestParam String skillSet,
-            @RequestParam String domainInterested,
-            @RequestParam Double tenth,
-            @RequestParam Double twelfth,
-            @RequestParam Double degree,
-            @RequestParam String preferredLocations,
-            @RequestParam(required = false, defaultValue = "false") boolean readyForBond,
-            @RequestParam MultipartFile resume,
-            @RequestParam MultipartFile video,
-            @RequestParam MultipartFile photo,
-            @RequestParam MultipartFile aadhar
-    ) {
+   @RequestMapping(value = "/profile", method = RequestMethod.POST)
+   public String saveProfile(
+           HttpSession session,
+           @RequestParam String skillSet,
+           @RequestParam String domainInterested,
+           @RequestParam(required = false) Double tenth,
+           @RequestParam(required = false) Double twelfth,
+           @RequestParam(required = false) Double degree,
+           @RequestParam String preferredLocations,
+           @RequestParam(required = false, defaultValue = "false") boolean readyForBond,
+           @RequestParam(required = false) MultipartFile resume,
+           @RequestParam(required = false) MultipartFile video,
+           @RequestParam(required = false) MultipartFile photo,
+           @RequestParam(required = false) MultipartFile aadhar
+   ) {
 
-        fresherProfileService.saveProfile(
-                session,
-                skillSet,
-                domainInterested,
-                tenth,
-                twelfth,
-                degree,
-                preferredLocations,
-                readyForBond,
-                resume,
-                video,
-                photo,
-                aadhar
-        );
+       try {
+           fresherProfileService.saveProfile(
+                   session,
+                   skillSet,
+                   domainInterested,
+                   tenth,
+                   twelfth,
+                   degree,
+                   preferredLocations,
+                   readyForBond,
+                   resume,
+                   video,
+                   photo,
+                   aadhar
+           );
+       } catch (Exception e) {
+           e.printStackTrace();
+           return "error"; // create error.jsp if needed
+       }
 
-        return "redirect:/fresher/dashboard";
-    }
+       return "redirect:/fresher/dashboard";
+   }
     @RequestMapping(value = "/viewprofile", method = RequestMethod.GET)
     public String viewProfile(HttpSession session, Model model) {
 
