@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Amentrop | For HR - Hire Job-Ready Talent Faster</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Amentrop for HR - Hire pre-trained, evaluated, and job-ready candidates directly. Skip job portals and social hiring with our skill-based hiring platform.">
+  <meta name="keywords" content="HR hiring, talent acquisition, job-ready candidates, skill-based hiring, recruitment platform">
+ 
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ 
+  <style>
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
+     
+      body {
+          background: #0b0b0b;
+          color: #fff;
+          font-family: 'Poppins', sans-serif;
+          line-height: 1.6;
+          overflow-x: hidden;
+      }
+     
+      /* Preloader for background images */
+      .bg-preload {
+          position: absolute;
+          width: 0;
+          height: 0;
+          overflow: hidden;
+      }
+     
+      /* NAVBAR - UNCHANGED AS REQUESTED */
+      .navbar {
+          background: rgba(0, 0, 0, 0.95) !important;
+          padding: 12px 0;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          z-index: 1000;
+          backdrop-filter: blur(10px);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+     
+      .nav-link {
+          color: #cfcfcf !important;
+          font-size: 14px;
+          font-weight: 500;
+          transition: all 0.3s ease;
+          margin: 0 8px;
+      }
+     
+      .nav-link:hover,
+      .nav-link.active {
+          color: #e4b544 !important;
+          transform: translateY(-1px);
+      }
+     
+      .btn-gold {
+          background: linear-gradient(45deg, #d4af37, #f5d173);
+          color: #000;
+          font-weight: 600;
+          border: none;
+          padding: 10px 24px;
+          border-radius: 6px;
+          transition: all 0.3s ease;
+      }
+     
+      .btn-gold:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+          background: linear-gradient(45deg, #e4b544, #f8d77a);
+      }
+     
+      /* Main Content Padding for Fixed Navbar */
+      .main-content {
+          padding-top: 80px;
+      }
+     
+      /* HERO SECTION with Background */
+      .hr-hero {
+          padding: 120px 0 80px;
+          position: relative;
+          overflow: hidden;
+          background: linear-gradient(160deg, #151515 0%, #0b0b0b 100%);
+      }
+     
+      .hr-hero::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-image: url('https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200');
+          background-size: cover;
+          background-position: center;
+          background-attachment: fixed;
+          opacity: 0.15;
+          z-index: 0;
+      }
+     
+      .hr-hero .container {
+          position: relative;
+          z-index: 1;
+      }
+     
+      .hr-hero h1 {
+          font-weight: 700;
+          font-size: 48px;
+          line-height: 1.2;
+          margin-bottom: 20px;
+          background: linear-gradient(90deg, #ffffff 0%, #e4b544 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+      }
+     
+      .hr-hero span {
+          color: #6fb6ff;
+          position: relative;
+      }
+     
+      .hr-hero span::after {
+          content: '';
+          position: absolute;
+          bottom: -5px;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background: linear-gradient(90deg, #6fb6ff, transparent);
+      }
+     
+      .hr-hero p {
+          color: #cfcfcf;
+          font-size: 18px;
+          max-width: 520px;
+          margin-bottom: 30px;
+      }
+     
+      .btn-outline-darkgold {
+          border: 1px solid #d4af37;
+          color: #d4af37;
+          background: transparent;
+          padding: 12px 28px;
+          border-radius: 6px;
+          font-size: 14px;
+          font-weight: 500;
+          transition: all 0.3s ease;
+      }
+     
+      .btn-outline-darkgold:hover {
+          background: rgba(212, 175, 55, 0.1);
+          transform: translateY(-2px);
+          border-color: #e4b544;
+          color: #e4b544;
+      }
+     
+      .hero-image-container {
+          position: relative;
+          padding: 20px;
+      }
+     
+      .hero-image-container::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: radial-gradient(circle at center, rgba(111, 182, 255, 0.1) 0%, transparent 70%);
+          border-radius: 20px;
+      }
+     
+      .hero-image {
+          width: 100%;
+          height: auto;
+          border-radius: 12px;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+          transform: perspective(1000px) rotateY(-5deg);
+          transition: transform 0.5s ease;
+      }
+     
+      .hero-image:hover {
+          transform: perspective(1000px) rotateY(0deg);
+      }
+     
+      /* SECTION */
+      .dark-section {
+          padding: 100px 0;
+          position: relative;
+      }
+     
+      .dark-section::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=60');
+          background-size: cover;
+          background-position: center;
+          background-attachment: fixed;
+          opacity: 0.07;
+          z-index: 0;
+      }
+     
+      .dark-section .container {
+          position: relative;
+          z-index: 1;
+      }
+     
+      .section-title {
+          text-align: center;
+          margin-bottom: 60px;
+      }
+     
+      .section-title h2 {
+          font-size: 36px;
+          font-weight: 700;
+          margin-bottom: 15px;
+          color: #fff;
+      }
+     
+      .section-title p {
+          color: #aaa;
+          font-size: 18px;
+          max-width: 600px;
+          margin: 0 auto;
+      }
+     
+      .info-box {
+          background: rgba(17, 17, 17, 0.9);
+          border: 1px solid rgba(51, 51, 51, 0.5);
+          border-radius: 16px;
+          padding: 35px;
+          height: 100%;
+          transition: all 0.4s ease;
+          position: relative;
+          overflow: hidden;
+          backdrop-filter: blur(10px);
+      }
+     
+      .info-box::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 5px;
+          height: 100%;
+          background: linear-gradient(to bottom, #d4af37, #6fb6ff);
+          border-radius: 5px 0 0 5px;
+      }
+     
+      .info-box:hover {
+          transform: translateY(-10px);
+          border-color: #d4af37;
+          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      }
+     
+      .info-box h5 {
+          font-weight: 700;
+          margin-bottom: 20px;
+          font-size: 22px;
+          color: #fff;
+      }
+     
+      .info-box p, .info-box li {
+          color: #cfcfcf;
+          font-size: 16px;
+          line-height: 1.7;
+      }
+     
+      .info-box ul {
+          list-style: none;
+          padding-left: 0;
+          margin-top: 20px;
+      }
+     
+      .info-box li {
+          margin-bottom: 12px;
+          padding-left: 30px;
+          position: relative;
+      }
+     
+      .info-box li::before {
+          content: '✓';
+          position: absolute;
+          left: 0;
+          color: #d4af37;
+          font-weight: bold;
+          font-size: 18px;
+      }
+     
+      /* FORM BOX */
+      .form-box {
+          background: rgba(248, 249, 250, 0.95);
+          color: #000;
+          border-radius: 16px;
+          padding: 40px;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+          height: 100%;
+          transition: all 0.4s ease;
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+     
+      .form-box:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      }
+     
+      .form-box h6 {
+          font-weight: 700;
+          font-size: 22px;
+          margin-bottom: 25px;
+          color: #333;
+          text-align: center;
+      }
+     
+      .form-box label {
+          font-size: 14px;
+          font-weight: 600;
+          color: #555;
+          margin-bottom: 8px;
+      }
+     
+      .form-control {
+          border-radius: 8px;
+          border: 1px solid #ddd;
+          padding: 12px 15px;
+          font-size: 14px;
+          transition: all 0.3s ease;
+          background: #fff;
+      }
+     
+      .form-control:focus {
+          border-color: #6fb6ff;
+          box-shadow: 0 0 0 0.25rem rgba(111, 182, 255, 0.25);
+      }
+     
+      .btn-success {
+          background: linear-gradient(45deg, #28a745, #20c997);
+          border: none;
+          padding: 14px;
+          font-weight: 600;
+          font-size: 16px;
+          border-radius: 8px;
+          transition: all 0.3s ease;
+      }
+     
+      .btn-success:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+      }
+     
+      /* FEATURES SECTION */
+      .features-section {
+          padding: 100px 0;
+          background: rgba(10, 10, 10, 0.9);
+          position: relative;
+          overflow: hidden;
+      }
+     
+      .features-section::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-image: url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+          background-size: cover;
+          background-position: center;
+          opacity: 0.05;
+          z-index: 0;
+      }
+     
+      .features-section .container {
+          position: relative;
+          z-index: 1;
+      }
+     
+      .feature-card {
+          background: rgba(17, 17, 17, 0.8);
+          border-radius: 16px;
+          padding: 30px;
+          text-align: center;
+          height: 100%;
+          transition: all 0.4s ease;
+          border: 1px solid rgba(51, 51, 51, 0.5);
+          margin-bottom: 30px;
+      }
+     
+      .feature-card:hover {
+          transform: translateY(-10px);
+          border-color: #6fb6ff;
+          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      }
+     
+      .feature-icon {
+          width: 70px;
+          height: 70px;
+          margin: 0 auto 25px;
+          background: linear-gradient(135deg, #d4af37, #6fb6ff);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 28px;
+          color: #000;
+      }
+     
+      .feature-card h4 {
+          font-size: 20px;
+          font-weight: 700;
+          margin-bottom: 15px;
+          color: #fff;
+      }
+     
+      .feature-card p {
+          color: #aaa;
+          font-size: 15px;
+          line-height: 1.6;
+      }
+     
+      /* CTA */
+      .hr-cta {
+          text-align: center;
+          padding: 100px 20px;
+          background: linear-gradient(135deg, #0b0b0b 0%, #151515 100%);
+          position: relative;
+          overflow: hidden;
+      }
+     
+      .hr-cta::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200');
+          background-size: cover;
+          background-position: center;
+          opacity: 0.08;
+          z-index: 0;
+      }
+     
+      .hr-cta .container {
+          position: relative;
+          z-index: 1;
+      }
+     
+      .hr-cta h2 {
+          font-weight: 700;
+          font-size: 42px;
+          margin-bottom: 30px;
+          line-height: 1.3;
+      }
+     
+      .hr-cta h2 span {
+          color: #e4b544;
+          position: relative;
+      }
+     
+      .hr-cta h2 span::after {
+          content: '';
+          position: absolute;
+          bottom: -5px;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background: linear-gradient(90deg, #e4b544, transparent);
+      }
+     
+      .btn-primary {
+          background: linear-gradient(45deg, #007bff, #6fb6ff);
+          border: none;
+          padding: 12px 30px;
+          font-weight: 600;
+          border-radius: 6px;
+          transition: all 0.3s ease;
+      }
+     
+      .btn-primary:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+      }
+     
+      /* FOOTER - UNCHANGED AS REQUESTED */
+      footer {
+          background: #000;
+          padding: 20px 0;
+          text-align: center;
+          font-size: 14px;
+          color: #aaa;
+          border-top: 1px solid rgba(255, 255, 255, 0.05);
+      }
+     
+      footer a {
+          color: #aaa;
+          text-decoration: none;
+          margin: 0 10px;
+          transition: color 0.3s ease;
+      }
+     
+      footer a:hover {
+          color: #e4b544;
+      }
+     
+      /* RESPONSIVE STYLES */
+      @media (max-width: 992px) {
+          .hr-hero h1 {
+              font-size: 36px;
+          }
+         
+          .section-title h2 {
+              font-size: 30px;
+          }
+         
+          .hr-cta h2 {
+              font-size: 32px;
+          }
+         
+          .info-box,
+          .form-box {
+              padding: 25px;
+          }
+      }
+     
+      @media (max-width: 768px) {
+          .hr-hero {
+              padding: 100px 0 60px;
+              text-align: center;
+          }
+         
+          .hr-hero h1 {
+              font-size: 32px;
+          }
+         
+          .hr-hero p {
+              font-size: 16px;
+          }
+         
+          .hero-image {
+              transform: none;
+              margin-top: 30px;
+          }
+         
+          .dark-section,
+          .features-section {
+              padding: 60px 0;
+          }
+         
+          .hr-cta {
+              padding: 70px 20px;
+          }
+         
+          .hr-cta h2 {
+              font-size: 28px;
+          }
+      }
+     
+      @media (max-width: 576px) {
+          .hr-hero h1 {
+              font-size: 28px;
+          }
+         
+          .btn-gold,
+          .btn-outline-darkgold,
+          .btn-primary {
+              display: block;
+              width: 100%;
+              margin-bottom: 10px;
+          }
+         
+          .hr-hero .mt-4 a {
+              display: block;
+              width: 100%;
+              margin-bottom: 10px;
+          }
+      }
+     
+      /* Animation classes */
+      .fade-in {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+     
+      .fade-in.visible {
+          opacity: 1;
+          transform: translateY(0);
+      }
+  </style>
+</head>
+<body>
+  <!-- Hidden preloader for background images -->
+  <div class="bg-preload">
+      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200" alt="Developer Team Meeting" class="img-fluid">
+     <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1400" alt="Software Engineer Team" class="img-fluid rounded shadow">
+      <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="preload">
+      <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="preload">
+  </div>
+ 
+  <!-- NAVBAR (Unchanged as requested) -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+          <a class="navbar-brand fw-bold">Amentrop</a>
+          <div class="collapse navbar-collapse show">
+              <ul class="navbar-nav ms-auto align-items-center">
+                  <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                  <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                  <li class="nav-item"><a class="nav-link" href="college.html">For College</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="for_hr.html">For HR</a></li>
+                  <li class="nav-item"><a class="nav-link" href="student.html">For Students</a></li>
+                  <li class="nav-item"><a class="nav-link" href="success.html">Success Stories</a></li>
+              </ul>
+              <a href="login.html" class="btn btn-light ms-3">Log in</a>
+              <a href="signup.html" class="btn btn-gold ms-2">Sign Up</a>
+          </div>
+      </div>
+  </nav>
+ 
+  <div class="main-content">
+      <!-- HERO SECTION -->
+      <section class="hr-hero">
+          <div class="container">
+              <div class="row align-items-center">
+                  <div class="col-lg-6 fade-in">
+                      <h1>
+                          Hire Job-Ready, Verified<br>
+                          Talent Faster with <span>Amentrop</span>
+                      </h1>
+                      <p class="mt-3">
+                          Skip job portals. Skip social hiring.<br>
+                          Hire trained candidates directly with our skill-based hiring platform that connects you with pre-evaluated, industry-ready talent.
+                      </p>
+                      <div class="mt-4">
+                          <a href="#" class="btn btn-gold me-2">Sign Up as HR</a>
+                          <a href="#" class="btn-outline-darkgold">Log in to HR Account</a>
+                      </div>
+                  </div>
+                  <div class="col-lg-6 text-center fade-in">
+                      <div class="hero-image-container">
+                          <img src="https://images.unsplash.com/photo-1531497865144-0464ef8fb9a9?w=1200" alt="Software Engineers Working Together" class="img-fluid">
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+     
+      <!-- INFO + FORM SECTION -->
+      <section class="dark-section">
+          <div class="container">
+              <div class="section-title fade-in">
+                  <h2>Streamline Your Hiring Process</h2>
+                  <p>Connect with pre-vetted candidates ready to contribute from day one</p>
+              </div>
+             
+              <div class="row">
+                  <!-- LEFT: What is Amentrop -->
+                  <div class="col-lg-6 mb-4 fade-in">
+                      <div class="info-box">
+                          <h5>What is Amentrop for HR?</h5>
+                          <p>
+                              Amentrop is a skill-based hiring platform that enables
+                              HR teams and recruiters to directly hire pre-trained,
+                              evaluated, and job-ready candidates.
+                          </p>
+                          <ul class="mt-3">
+                              <li>Industry-focused training programs</li>
+                              <li>Comprehensive skill evaluations and assessments</li>
+                              <li>Behavioral and cultural fit analysis</li>
+                              <li>Higher joining reliability & reduced drop-outs</li>
+                              <li>Direct communication with candidates</li>
+                              <li>Streamlined onboarding process</li>
+                          </ul>
+                      </div>
+                  </div>
+                 
+                  <!-- RIGHT: Form -->
+                  <div class="col-lg-6 mb-4 fade-in">
+                      <div class="form-box">
+                          <h6>Get Started with Amentrop HR</h6>
+                          <form class="mt-3">
+                              <div class="mb-3">
+                                  <label>Company Name *</label>
+                                  <input type="text" class="form-control" placeholder="Enter your company name" required>
+                              </div>
+                              <div class="mb-3">
+                                  <label>Company Location *</label>
+                                  <input type="text" class="form-control" placeholder="City, State" required>
+                              </div>
+                              <div class="mb-3">
+                                  <label>Company LinkedIn Page</label>
+                                  <input type="text" class="form-control" placeholder="https://linkedin.com/company/...">
+                              </div>
+                              <div class="mb-3">
+                                  <label>HR Contact Email *</label>
+                                  <input type="email" class="form-control" placeholder="hr@yourcompany.com" required>
+                              </div>
+                              <button class="btn btn-success w-100 mt-3">
+                                  <i class="fas fa-rocket me-2"></i> Sign Up as HR
+                              </button>
+                              <p class="text-muted text-center mt-3 mb-0 small">
+                                  By signing up, you agree to our Terms & Privacy Policy
+                              </p>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+     
+      <!-- FEATURES SECTION -->
+      <section class="features-section">
+          <div class="container">
+              <div class="section-title fade-in">
+                  <h2>Why HR Teams Choose Amentrop</h2>
+                  <p>Our platform is designed to solve the biggest challenges in modern recruitment</p>
+              </div>
+             
+              <div class="row">
+                  <div class="col-md-4 fade-in">
+                      <div class="feature-card">
+                          <div class="feature-icon">
+                              <i class="fas fa-bolt"></i>
+                          </div>
+                          <h4>Fast Hiring</h4>
+                          <p>Reduce hiring time by up to 70% with our pre-vetted candidate pool. No more sifting through hundreds of unqualified resumes.</p>
+                      </div>
+                  </div>
+                 
+                  <div class="col-md-4 fade-in">
+                      <div class="feature-card">
+                          <div class="feature-icon">
+                              <i class="fas fa-chart-line"></i>
+                          </div>
+                          <h4>Quality Candidates</h4>
+                          <p>Every candidate is skill-assessed, industry-trained, and verified. Get candidates who are truly ready to contribute from day one.</p>
+                      </div>
+                  </div>
+                 
+                  <div class="col-md-4 fade-in">
+                      <div class="feature-card">
+                          <div class="feature-icon">
+                              <i class="fas fa-shield-alt"></i>
+                          </div>
+                          <h4>Reduced Risk</h4>
+                          <p>Lower attrition rates with our candidate matching algorithm and post-offer support that ensures better cultural and role fit.</p>
+                      </div>
+                  </div>
+                 
+                  <div class="col-md-4 fade-in">
+                      <div class="feature-card">
+                          <div class="feature-icon">
+                              <i class="fas fa-search"></i>
+                          </div>
+                          <h4>Smart Matching</h4>
+                          <p>Our AI-powered algorithm matches your requirements with the most suitable candidates based on skills, experience, and cultural fit.</p>
+                      </div>
+                  </div>
+                 
+                  <div class="col-md-4 fade-in">
+                      <div class="feature-card">
+                          <div class="feature-icon">
+                              <i class="fas fa-user-check"></i>
+                          </div>
+                          <h4>Verified Profiles</h4>
+                          <p>All candidate profiles include verified skill assessments, project portfolios, and training completion certificates.</p>
+                      </div>
+                  </div>
+                 
+                  <div class="col-md-4 fade-in">
+                      <div class="feature-card">
+                          <div class="feature-icon">
+                              <i class="fas fa-headset"></i>
+                          </div>
+                          <h4>Dedicated Support</h4>
+                          <p>Get personalized support from our HR success team throughout the hiring process, from candidate selection to onboarding.</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+     
+      <!-- CTA SECTION -->
+      <section class="hr-cta">
+          <div class="container">
+              <h2 class="fade-in">
+                  Hire Smarter. <span>Hire Faster.</span><br>
+                  Hire With Confidence
+              </h2>
+              <p class="text-light mb-4 fade-in" style="max-width: 600px; margin: 0 auto;">
+                  Join over 500+ companies who have transformed their hiring process with Amentrop
+              </p>
+              <div class="mt-4 fade-in">
+                  <a href="#" class="btn btn-gold me-3">
+                      <i class="fas fa-user-plus me-2"></i> Sign Up as HR
+                  </a>
+                  <a href="#" class="btn btn-primary">
+                      <i class="fas fa-sign-in-alt me-2"></i> Login to HR account
+                  </a>
+              </div>
+             
+              <div class="row mt-5">
+                  <div class="col-md-3 col-6 text-center mb-3 fade-in">
+                      <h3 class="text-gold" style="color: #e4b544; font-size: 36px;">500+</h3>
+                      <p class="text-light small">Companies</p>
+                  </div>
+                  <div class="col-md-3 col-6 text-center mb-3 fade-in">
+                      <h3 class="text-gold" style="color: #e4b544; font-size: 36px;">10K+</h3>
+                      <p class="text-light small">Candidates Hired</p>
+                  </div>
+                  <div class="col-md-3 col-6 text-center mb-3 fade-in">
+                      <h3 class="text-gold" style="color: #e4b544; font-size: 36px;">70%</h3>
+                      <p class="text-light small">Faster Hiring</p>
+                  </div>
+                  <div class="col-md-3 col-6 text-center mb-3 fade-in">
+                      <h3 class="text-gold" style="color: #e4b544; font-size: 36px;">95%</h3>
+                      <p class="text-light small">Retention Rate</p>
+                  </div>
+              </div>
+          </div>
+      </section>
+  </div>
+ 
+  <!-- FOOTER (Unchanged as requested) -->
+  <footer>
+      <div class="container">
+          © 2025 Amentrop |
+          <a href="#">Privacy Policy</a> |
+          <a href="#">Terms & Conditions</a> |
+          <a href="#">Contact Us</a>
+      </div>
+  </footer>
+ 
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+ 
+  <script>
+      // Scroll animation
+      document.addEventListener('DOMContentLoaded', function() {
+          // Fade in elements on scroll
+          const fadeElements = document.querySelectorAll('.fade-in');
+         
+          const fadeInOnScroll = function() {
+              fadeElements.forEach(function(element) {
+                  const elementTop = element.getBoundingClientRect().top;
+                  const elementVisible = 150;
+                 
+                  if (elementTop < window.innerHeight - elementVisible) {
+                      element.classList.add('visible');
+                  }
+              });
+          };
+         
+          // Initial check
+          fadeInOnScroll();
+         
+          // Check on scroll
+          window.addEventListener('scroll', fadeInOnScroll);
+         
+          // Background image preloading
+          const preloadImages = function() {
+              const images = document.querySelectorAll('.bg-preload img');
+              images.forEach(img => {
+                  const tempImg = new Image();
+                  tempImg.src = img.src;
+              });
+          };
+         
+          preloadImages();
+         
+          // Form submission handling
+          const form = document.querySelector('.form-box form');
+          if (form) {
+              form.addEventListener('submit', function(e) {
+                  e.preventDefault();
+                 
+                  // Get form values
+                  const companyName = form.querySelector('input[type="text"]').value;
+                  const email = form.querySelector('input[type="email"]').value;
+                 
+                  if (companyName && email) {
+                      // In a real application, you would send this data to a server
+                      alert(`Thank you, ${companyName}! We'll contact you at ${email} shortly to set up your HR account.`);
+                      form.reset();
+                  }
+              });
+          }
+         
+          // Smooth scrolling for anchor links
+          document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+              anchor.addEventListener('click', function(e) {
+                  if (this.getAttribute('href') === '#') return;
+                 
+                  e.preventDefault();
+                  const targetId = this.getAttribute('href');
+                  const targetElement = document.querySelector(targetId);
+                 
+                  if (targetElement) {
+                      window.scrollTo({
+                          top: targetElement.offsetTop - 80,
+                          behavior: 'smooth'
+                      });
+                  }
+              });
+          });
+      });
+  </script>
+</body>
+</html>
+
+
+
