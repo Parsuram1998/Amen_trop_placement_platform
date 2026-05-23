@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: amentrop-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass123
+      MYSQL_DATABASE: secondproduct
+      MYSQL_USER: amenuser
+      MYSQL_PASSWORD: amenpass123
+    ports:
+      - "3307:3306"
+    volumes:
+      - amentrop_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    container_name: amentrop-app
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/secondproduct?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: amenuser
+      SPRING_DATASOURCE_PASSWORD: amenpass123
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_MAIL_USERNAME: fightthefireapp123@gmail.com
+      SPRING_MAIL_PASSWORD: kipe zrpt tzvd wtui
+      UPLOAD_DIR: /app/uploads
+    ports:
+      - "8085:8085"
+    volumes:
+      - amentrop_uploads:/app/uploads
+      - amentrop_certs:/app/certificates
+
+volumes:
+  amentrop_mysql_data:
+  amentrop_uploads:
+  amentrop_certs:
