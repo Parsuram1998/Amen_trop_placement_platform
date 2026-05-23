@@ -1,2897 +1,633 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
- <meta charset="UTF-8">
- <title>Reessentials - Train Smarter, Hire Faster</title>
- <meta name="viewport" content="width=device-width, initial-scale=1">
- <!-- Performance Optimizations -->
- <meta http-equiv="X-UA-Compatible" content="IE=edge">
- <meta name="description" content="Skill-Based Training & Intelligent Hiring Platform - Transform students into industry-ready professionals">
- <meta name="keywords" content="training, hiring, recruitment, skills, career, jobs, talent">
- <!-- DNS Prefetch for CDNs -->
- <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
- <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
- <link rel="dns-prefetch" href="https://fonts.googleapis.com">
- <!-- Preload Critical Resources -->
- <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" as="style" crossorigin>
- <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" as="style" crossorigin>
- <!-- Bootstrap 5 (Minified) -->
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
- <!-- Font Awesome (Optimized) -->
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous">
- <!-- Google Fonts (Optimized) -->
- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" crossorigin="anonymous">
- <!-- AOS Animation (Deferred) -->
- <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" media="print" onload="this.media='all'">
- <noscript><link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"></noscript>
- <!-- Lazy Loading CSS -->
- <style>
-     /* Critical CSS - Above the Fold */
-     :root {
-         --gold: #D4AF37;
-         --gold-light: #F5D173;
-         --gold-dark: #B8860B;
-         --black: #0A0A0A;
-         --black-light: #1A1A1A;
-         --black-lighter: #222222;
-         --white: #FFFFFF;
-         --text-light: #F5F5F5;
-         --text-gray: #A0A0A0;
-         --border-color: rgba(212, 175, 55, 0.2);
-     }
-   
-     * {
-         margin: 0;
-         padding: 0;
-         box-sizing: border-box;
-     }
-   
-     body {
-         background: var(--black);
-         color: var(--text-light);
-         font-family: 'Poppins', sans-serif;
-         overflow-x: hidden;
-         line-height: 1.7;
-         -webkit-font-smoothing: antialiased;
-         -moz-osx-font-smoothing: grayscale;
-     }
-   
-     /* Ensure content is visible before AOS loads */
-     [data-aos] {
-         opacity: 1 !important;
-         transform: none !important;
-     }
-   
-     .js-loaded [data-aos] {
-         opacity: 0;
-     }
- </style>
- <!-- Full CSS (Loaded after critical CSS) -->
- <style id="full-css" media="print" onload="this.media='all'">
-     h1, h2, h3, h4, h5, h6 {
-         font-family: 'Montserrat', sans-serif;
-         font-weight: 800;
-         line-height: 1.2;
-         margin-bottom: 1.5rem;
-     }
-   
-     p {
-         margin-bottom: 1.5rem;
-         color: var(--text-gray);
-     }
-   
-     .container {
-         max-width: 1200px;
-         padding: 0 1.5rem;
-         margin: 0 auto;
-     }
-   
-     section {
-         padding: 5rem 0;
-         position: relative;
-         display: flex;
-         align-items: center;
-     }
-   
-     /* Full Page Backgrounds (Lazy Loaded) */
-     .section-bg {
-         position: absolute;
-         top: 0;
-         left: 0;
-         width: 100%;
-         height: 100%;
-         z-index: 1;
-         background-color: var(--black);
-     }
-   
-     .section-bg.loaded::before {
-         content: '';
-         position: absolute;
-         top: 0;
-         left: 0;
-         width: 100%;
-         height: 100%;
-         background: linear-gradient(135deg, rgba(10, 10, 10, 0.85) 0%, rgba(26, 26, 26, 0.9) 100%);
-         z-index: 2;
-     }
-   
-     .section-bg img {
-         width: 100%;
-         height: 100%;
-         object-fit: cover;
-         object-position: center;
-         position: absolute;
-         top: 0;
-         left: 0;
-         z-index: 1;
-         opacity: 0;
-         transition: opacity 0.8s ease;
-     }
-   
-     .section-bg img.loaded {
-         opacity: 1;
-     }
-   
-     .section-content {
-         position: relative;
-         z-index: 3;
-     }
-   
-     /* Custom Scrollbar */
-     ::-webkit-scrollbar {
-         width: 10px;
-     }
-   
-     ::-webkit-scrollbar-track {
-         background: var(--black);
-     }
-   
-     ::-webkit-scrollbar-thumb {
-         background: linear-gradient(135deg, var(--gold), var(--gold-light));
-         border-radius: 5px;
-     }
-   
-     /* Gold Gradients */
-     .gold-gradient {
-         background: linear-gradient(135deg, var(--gold), var(--gold-light));
-         -webkit-background-clip: text;
-         -webkit-text-fill-color: transparent;
-         background-clip: text;
-     }
-   
-     .gold-bg-gradient {
-         background: linear-gradient(135deg, var(--gold), var(--gold-light));
-     }
-    
-   
-     /* Luxury Navbar */
-     .navbar {
-         background: rgba(10, 10, 10, 0.95);
-         backdrop-filter: blur(10px);
-         padding: 1rem 0;
-         border-bottom: 1px solid var(--border-color);
-         position: fixed;
-         width: 100%;
-         top: 0;
-         z-index: 1000;
-         transition: all 0.3s ease;
-     }
-   
-     .navbar.scrolled {
-         padding: 0.7rem 0;
-         background: rgba(10, 10, 10, 0.98);
-         box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-     }
-   
-     .nav-logo {
-         font-family: 'Montserrat', sans-serif;
-         font-size: 1.8rem;
-         font-weight: 900;
-         background: linear-gradient(135deg, var(--gold), var(--gold-light));
-         -webkit-background-clip: text;
-         -webkit-text-fill-color: transparent;
-         text-decoration: none;
-         letter-spacing: -0.5px;
-         display: inline-block;
-     }
-   
-     .nav-link {
-         color: var(--text-light) !important;
-         font-weight: 500;
-         padding: 0.5rem 1rem !important;
-         margin: 0 0.3rem;
-         font-size: 0.95rem;
-         position: relative;
-         transition: all 0.3s ease;
-     }
-   
-     .nav-link::after {
-         content: '';
-         position: absolute;
-         bottom: 0;
-         left: 50%;
-         transform: translateX(-50%);
-         width: 0;
-         height: 2px;
-         background: linear-gradient(135deg, var(--gold), var(--gold-light));
-         transition: width 0.3s ease;
-     }
-   
-     .nav-link:hover,
-     .nav-link.active {
-         color: var(--gold-light) !important;
-     }
-   
-     .nav-link:hover::after,
-     .nav-link.active::after {
-         width: 70%;
-     }
-   
-     /* Enhanced Hero Section with Carousel */
-     .hero-section {
-         min-height: 100vh;
-         position:relative;
-         padding: 0;
-         overflow: hidden;
-     }
-   
-     .hero-carousel {
-         width: 100%;
-         height: 100vh;
-         position: relative;
-     }
-   
-     .carousel-inner {
-         height: 100vh;
-     }
-   
-     .carousel-item {
-         height: 100vh;
-         position: relative;
-         transition: transform 1s ease-in-out;
-         opacity: 0;
-         display: none;
-     }
-   
-     .carousel-item.active {
-         opacity: 1;
-         display: block;
-     }
-   
-     .carousel-item::before {
-         content: '';
-         position: absolute;
-         top: 0;
-         left: 0;
-         width: 100%;
-         height: 100%;
-         background: linear-gradient(135deg,
-             rgba(10, 10, 10, 0.85) 0%,
-             rgba(26, 26, 26, 0.9) 100%);
-         z-index: 1;
-     }
-   
-     .carousel-bg {
-         position: absolute;
-         top: 0;
-         left: 0;
-         width: 100%;
-         height: 100%;
-         object-fit: cover;
-         z-index: 0;
-         opacity: 0;
-         transition: opacity 0.8s ease;
-     }
-   
-     .carousel-bg.loaded {
-         opacity: 1;
-     }
-   
-     .carousel-content {
-         position: absolute;
-         top: 50%;
-         left: 50%;
-         transform: translate(-50%, -50%);
-         z-index: 2;
-         width: 100%;
-         padding: 0 2rem;
-         text-align: center;
-     }
-   
-     .hero-title {
-         font-size: 3.8rem;
-         font-weight: 900;
-         margin-bottom: 1.5rem;
-         line-height: 1.1;
-         text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-     }
-   
-     .hero-title span {
-         display: inline-block;
-     }
-   
-     .hero-subtitle {
-         font-size: 1.5rem;
-         color: var(--gold-light);
-         margin-bottom: 2rem;
-         font-weight: 500;
-         max-width: 700px;
-         margin-left: auto;
-         margin-right: auto;
-         line-height: 1.6;
-         text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-     }
-   
-     .hero-text {
-         font-size: 1.2rem;
-         color: var(--text-gray);
-         max-width: 800px;
-         margin: 0 auto 3rem;
-         line-height: 1.8;
-         text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-     }
-    .carousel-bg,
-.section-bg img {
-   filter: contrast(1.05) brightness(0.9);
-}
-.carousel-item::before {
-   background: linear-gradient(135deg,
-       rgba(10,10,10,0.65),
-       rgba(26,26,26,0.75));
-}
-   
-     /* Carousel Controls */
-     .carousel-controls {
-         position: absolute;
-         bottom: 40px;
-         left: 0;
-         width: 100%;
-         z-index: 10;
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         gap: 20px;
-     }
-   
-     .carousel-pagination {
-         display: flex;
-         gap: 10px;
-     }
-   
-     .carousel-dot {
-         width: 12px;
-         height: 12px;
-         border-radius: 50%;
-         background: rgba(255, 255, 255, 0.2);
-         border: 2px solid transparent;
-         cursor: pointer;
-         transition: all 0.3s ease;
-     }
-   
-     .carousel-dot.active {
-         background: var(--gold);
-         transform: scale(1.2);
-         box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
-     }
-   
-     .carousel-dot:hover:not(.active) {
-         background: rgba(212, 175, 55, 0.5);
-     }
-   
-     .carousel-progress {
-         position: absolute;
-         bottom: 0;
-         left: 0;
-         width: 0%;
-         height: 3px;
-         background: linear-gradient(90deg, var(--gold), var(--gold-light));
-         z-index: 11;
-         transition: width 5s linear;
-     }
-   
-     /* Buttons */
-     .btn-gold {
-         background: linear-gradient(135deg, var(--gold), var(--gold-dark));
-         color: var(--black) !important;
-         font-weight: 700;
-         padding: 1rem 2.5rem;
-         border-radius: 10px;
-         border: none;
-         font-size: 1rem;
-         transition: all 0.3s ease;
-         box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
-         position: relative;
-         overflow: hidden;
-         display: inline-flex;
-         align-items: center;
-         justify-content: center;
-         gap: 0.5rem;
-         cursor: pointer;
-         user-select: none;
-     }
-   
-     .btn-gold:hover {
-         transform: translateY(-3px);
-         box-shadow: 0 15px 35px rgba(212, 175, 55, 0.4);
-     }
-   
-     .btn-gold i {
-         transition: transform 0.3s ease;
-     }
-   
-     .btn-gold:hover i {
-         transform: translateX(5px);
-     }
-   
-     /* Modern Features Section */
-    
-    
-    /* ===== WOW PREMIUM FEATURE CARDS (Clean & Modern) ===== */
-.modern-features-section {
-   padding: 5rem 0;
-   background: #0a0a0a;
-}
-.feature-showcase {
-   display: grid;
-   grid-template-columns: repeat(3, 1fr);
-   gap: 2rem;
-}
-/* Card */
-.feature-showcase-item {
-   background: rgba(20, 20, 20, 0.85);
-   border: 1px solid rgba(212,175,55,0.15);
-   border-radius: 20px;
-   padding: 2.2rem;
-   transition: all 0.35s ease;
-   position: relative;
-   overflow: hidden;
-   backdrop-filter: blur(10px);
-}
-/* Hover WOW */
-.feature-showcase-item:hover {
-   transform: translateY(-12px) scale(1.02);
-   border-color: rgba(212,175,55,0.7);
-   box-shadow: 0 25px 50px rgba(0,0,0,0.5),
-               0 0 25px rgba(212,175,55,0.25);
-}
-/* Top number */
-.feature-showcase-number {
-   font-size: 0.8rem;
-   letter-spacing: 3px;
-   color: rgba(212,175,55,0.6);
-   margin-bottom: 1rem;
-   font-weight: 600;
-}
-/* Icon Circle */
-.feature-showcase-item::before {
-   content: "";
-   position: absolute;
-   top: -40px;
-   right: -40px;
-   width: 120px;
-   height: 120px;
-   background: radial-gradient(circle, rgba(212,175,55,0.15), transparent 70%);
-}
-/* Title */
-.feature-showcase-title {
-   font-size: 1.6rem;
-   font-weight: 700;
-   color: #fff;
-   margin-bottom: 1rem;
-   line-height: 1.3;
-}
-/* Description */
-.feature-showcase-desc {
-   font-size: 0.95rem;
-   color: #a8a8a8;
-   line-height: 1.6;
-   margin-bottom: 1.8rem;
-}
-/* Bottom Tag */
-.feature-showcase-tag {
-   display: inline-flex;
-   align-items: center;
-   gap: 0.5rem;
-   padding: 0.5rem 1.2rem;
-   border-radius: 30px;
-   background: rgba(212,175,55,0.08);
-   border: 1px solid rgba(212,175,55,0.3);
-   font-size: 0.9rem;
-   font-weight: 600;
-   color: #d4af37;
-   transition: all 0.3s ease;
-}
-.feature-showcase-item:hover .feature-showcase-tag {
-   background: linear-gradient(135deg,#d4af37,#f5d173);
-   color: #000;
-   border-color: transparent;
-}
-/* Responsive */
-@media(max-width:992px){
-   .feature-showcase{
-       grid-template-columns: repeat(2,1fr);
-   }
-}
-@media(max-width:768px){
-   .feature-showcase{
-       grid-template-columns: 1fr;
-   }
-}
-   
-    
-     .feature-showcase-item::before {
-         content: '';
-         position: absolute;
-         inset: 0;
-         background: linear-gradient(
-             135deg,
-             rgba(212, 175, 55, 0.03) 0%,
-             rgba(212, 175, 55, 0.01) 100%
-         );
-         opacity: 0;
-         transition: opacity 0.4s ease;
-         z-index: 1;
-     }
-   
-     .feature-showcase-item:hover::before {
-         opacity: 1;
-     }
-   
-     .feature-showcase-item:hover {
-         transform: translateY(-10px);
-         border-color: rgba(212, 175, 55, 0.2);
-         box-shadow:
-             0 20px 40px rgba(0, 0, 0, 0.3),
-             0 0 60px rgba(212, 175, 55, 0.05),
-             inset 0 0 0 1px rgba(212, 175, 55, 0.1);
-     }
-   
-     .feature-showcase-content {
-         position: relative;
-         padding: 2.5rem 2rem;
-         height: 100%;
-         display: flex;
-         flex-direction: column;
-         z-index: 2;
-     }
-   
-     .feature-showcase-number {
-         position: absolute;
-         top: 2rem;
-         right: 2rem;
-         text-align: right;
-         z-index: 3;
-     }
-   
-     .number-glow {
-         font-family: 'Montserrat', sans-serif;
-         font-size: 2.5rem;
-         font-weight: 900;
-         color: rgba(255, 255, 255, 0.05);
-         line-height: 1;
-         transition: all 0.4s ease;
-         display: block;
-     }
-   
-     .feature-showcase-item:hover .number-glow {
-         color: rgba(212, 175, 55, 0.1);
-         transform: scale(1.05);
-     }
-   
-     .number-line {
-         width: 40px;
-         height: 2px;
-         background: linear-gradient(90deg,
-             rgba(212, 175, 55, 0.3),
-             transparent);
-         margin-top: 0.5rem;
-         margin-left: auto;
-         transition: all 0.4s ease;
-         transform-origin: right;
-     }
-   
-     .feature-showcase-item:hover .number-line {
-         width: 60px;
-         background: linear-gradient(90deg,
-             var(--gold),
-             rgba(212, 175, 55, 0.3));
-     }
-   
-     .feature-showcase-icon {
-         width: 56px;
-         height: 56px;
-         background: linear-gradient(135deg,
-             rgba(212, 175, 55, 0.1),
-             rgba(212, 175, 55, 0.05));
-         border-radius: 14px;
-         display: flex;
-         align-items: center;
-         justify-content: center;
-         margin-bottom: 1.5rem;
-         color: var(--gold);
-         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-         position: relative;
-         overflow: hidden;
-     }
-   
-     .feature-showcase-icon::before {
-         content: '';
-         position: absolute;
-         inset: 0;
-         background: linear-gradient(135deg,
-             var(--gold),
-             var(--gold-light));
-         opacity: 0;
-         transition: opacity 0.4s ease;
-     }
-   
-     .feature-showcase-icon svg {
-         position: relative;
-         z-index: 2;
-         transition: all 0.4s ease;
-     }
-   
-     .feature-showcase-item:hover .feature-showcase-icon {
-         transform: translateY(-5px) scale(1.05);
-         box-shadow:
-             0 10px 20px rgba(212, 175, 55, 0.2),
-             inset 0 1px 0 rgba(255, 255, 255, 0.2);
-     }
-   
-     .feature-showcase-item:hover .feature-showcase-icon::before {
-         opacity: 1;
-     }
-   
-     .feature-showcase-item:hover .feature-showcase-icon svg {
-         color: var(--black);
-         transform: rotate(5deg);
-     }
-   
-    
-   
-     .title-line {
-         position: absolute;
-         bottom: 0;
-         left: 0;
-         width: 40px;
-         height: 2px;
-         background: linear-gradient(90deg,
-             var(--gold),
-             rgba(212, 175, 55, 0.3));
-         transition: all 0.4s ease;
-     }
-   
-     .feature-showcase-item:hover .title-line {
-         width: 60px;
-         background: linear-gradient(90deg,
-             var(--gold),
-             var(--gold-light));
-     }
-   
-   
-     .feature-showcase-item:hover .feature-showcase-desc {
-         color: rgba(255, 255, 255, 0.9);
-     }
-   
-   
-   
-     .feature-showcase-tag i {
-         font-size: 0.75rem;
-     }
-   
-     .feature-showcase-item:hover .feature-showcase-tag {
-         background: rgba(212, 175, 55, 0.15);
-         border-color: rgba(212, 175, 55, 0.3);
-         transform: translateY(-2px);
-         box-shadow: 0 5px 15px rgba(212, 175, 55, 0.1);
-     }
-   
-     /* About Section */
-     #about .section-bg::before {
-         background: linear-gradient(135deg, rgba(10, 10, 10, 0.88) 0%, rgba(26, 26, 26, 0.92) 100%);
-     }
-   
-     .about-header {
-         text-align: center;
-         margin-bottom: 3rem;
-     }
-   
-     .about-badge {
-         display: inline-block;
-         background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(245, 209, 115, 0.05));
-         border: 1px solid var(--border-color);
-         padding: 0.5rem 1.5rem;
-         border-radius: 50px;
-         font-size: 0.9rem;
-         color: var(--gold);
-         font-weight: 600;
-         letter-spacing: 1px;
-         margin-bottom: 1.5rem;
-         text-transform: uppercase;
-     }
-   
-     .section-title {
-         font-size: 2.5rem;
-         margin-bottom: 1rem;
-         background: linear-gradient(135deg, var(--white), var(--gold-light));
-         -webkit-background-clip: text;
-         -webkit-text-fill-color: transparent;
-     }
-   
-     .section-subtitle {
-         font-size: 1.1rem;
-         color: var(--gold-light);
-         margin-bottom: 2.5rem;
-         max-width: 600px;
-         margin-left: auto;
-         margin-right: auto;
-     }
-   
-     /* About Content */
-     .about-content {
-         display: flex;
-         flex-direction: column;
-         gap: 3rem;
-     }
-   
-     /* Story Section */
-     .story-section {
-         background: rgba(34, 34, 34, 0.8);
-         border-radius: 16px;
-         padding: 3rem;
-         border: 1px solid var(--border-color);
-         position: relative;
-         overflow: hidden;
-         backdrop-filter: blur(10px);
-     }
-   
-     .story-section::before {
-         content: '';
-         position: absolute;
-         top: 0;
-         left: 0;
-         width: 5px;
-         height: 100%;
-         background: linear-gradient(180deg, var(--gold), var(--gold-light));
-     }
-   
-     .story-title {
-         font-size: 1.8rem;
-         margin-bottom: 1.5rem;
-         color: var(--white);
-         position: relative;
-         padding-left: 1rem;
-     }
-   
-     .story-title::before {
-         content: '';
-         position: absolute;
-         left: 0;
-         top: 50%;
-         transform: translateY(-50%);
-         width: 4px;
-         height: 60%;
-         background: linear-gradient(180deg, var(--gold), var(--gold-light));
-     }
-   
-     .story-text {
-         font-size: 1rem;
-         line-height: 1.8;
-         color: var(--text-gray);
-     }
-   
-     /* Mission Vision Grid - UPDATED */
-     .mission-vision-grid {
-         display: grid;
-         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-         gap: 2rem;
-     }
-   
-     .mission-card, .vision-card {
-         background: rgba(34, 34, 34, 0.8);
-         border-radius: 16px;
-         padding: 2.5rem;
-         border: 1px solid var(--border-color);
-         position: relative;
-         overflow: hidden;
-         transition: all 0.3s ease;
-         height: 100%;
-         backdrop-filter: blur(10px);
-     }
-   
-     .mission-card:hover, .vision-card:hover {
-         transform: translateY(-8px);
-         border-color: rgba(212, 175, 55, 0.5);
-         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-     }
-   
-     .mission-card::before {
-         content: '';
-         position: absolute;
-         top: 0;
-         left: 0;
-         width: 100%;
-         height: 4px;
-         background: linear-gradient(90deg, var(--gold), var(--gold-light));
-     }
-   
-     .vision-card::before {
-         content: '';
-         position: absolute;
-         top: 0;
-         left: 0;
-         width: 100%;
-         height: 4px;
-         background: linear-gradient(90deg, var(--gold-light), var(--gold));
-     }
-   
-     .card-icon {
-         width: 60px;
-         height: 60px;
-         background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(245, 209, 115, 0.05));
-         border-radius: 50%;
-         display: flex;
-         align-items: center;
-         justify-content: center;
-         margin-bottom: 1.5rem;
-         color: var(--gold);
-         font-size: 1.5rem;
-     }
-   
-     .card-title {
-         font-size: 1.4rem;
-         margin-bottom: 1rem;
-         color: var(--white);
-     }
-   
-     /* UPDATED Mission & Vision Text */
-     .mission-text {
-         font-size: 1.1rem;
-         line-height: 1.7;
-         color: var(--text-gray);
-         position: relative;
-         padding-left: 1.5rem;
-         border-left: 3px solid rgba(212, 175, 55, 0.3);
-         background: linear-gradient(135deg, transparent, rgba(212, 175, 55, 0.03));
-         padding: 1.5rem;
-         border-radius: 8px;
-         margin-top: 1rem;
-     }
-   
-     .vision-text {
-         font-size: 1.1rem;
-         line-height: 1.7;
-         color: var(--text-gray);
-         position: relative;
-         padding-left: 1.5rem;
-         border-left: 3px solid rgba(245, 209, 115, 0.3);
-         background: linear-gradient(135deg, transparent, rgba(245, 209, 115, 0.03));
-         padding: 1.5rem;
-         border-radius: 8px;
-         margin-top: 1rem;
-     }
-   
-     /* NEW - REDESIGNED CORE VALUES SECTION */
-.values-section {
-   margin-top: 0;
-   padding-top: 1rem;
-   position: relative;
-}
-   
-     .values-header {
-         text-align: center;
-         margin-bottom: 4rem;
-         position: relative;
-     }
-   
-     .values-title {
-         font-size: 2.5rem;
-         background: linear-gradient(135deg, var(--white), var(--gold-light));
-         -webkit-background-clip: text;
-         -webkit-text-fill-color: transparent;
-         margin-bottom: 1rem;
-     }
-   
-     .values-subtitle {
-         font-size: 1.1rem;
-         color: var(--text-gray);
-         max-width: 600px;
-         margin: 0 auto;
-     }
-   
-     .values-timeline {
-         position: relative;
-         max-width: 900px;
-         margin: 0 auto;
-         padding: 3rem 0;
-     }
-   
-     .values-timeline::before {
-         content: '';
-         position: absolute;
-         left: 50%;
-         transform: translateX(-50%);
-         width: 2px;
-         height: 100%;
-         background: linear-gradient(180deg,
-             transparent,
-             var(--gold),
-             var(--gold-light),
-             transparent);
-     }
-   
-     .value-timeline-item {
-         display: flex;
-         align-items: center;
-         margin-bottom: 4rem;
-         position: relative;
-         opacity: 0;
-         transform: translateY(30px);
-         transition: all 0.8s ease;
-     }
-   
-     .value-timeline-item.visible {
-         opacity: 1;
-         transform: translateY(0);
-     }
-   
-     .value-timeline-item:nth-child(odd) {
-         justify-content: flex-end;
-     }
-   
-     .value-timeline-item:nth-child(even) {
-         justify-content: flex-start;
-     }
-   
-     .timeline-dot {
-         position: absolute;
-         left: 50%;
-         transform: translateX(-50%);
-         width: 20px;
-         height: 20px;
-         background: var(--black);
-         border: 3px solid var(--gold);
-         border-radius: 50%;
-         z-index: 2;
-     }
-   
-     .timeline-dot::after {
-         content: '';
-         position: absolute;
-         top: 50%;
-         left: 50%;
-         transform: translate(-50%, -50%);
-         width: 8px;
-         height: 8px;
-         background: var(--gold-light);
-         border-radius: 50%;
-     }
-   
-     .timeline-content {
-         background: rgba(34, 34, 34, 0.8);
-         border: 1px solid rgba(212, 175, 55, 0.2);
-         border-radius: 16px;
-         padding: 2rem;
-         width: 45%;
-         position: relative;
-         backdrop-filter: blur(10px);
-         transition: all 0.4s ease;
-     }
-   
-     .value-timeline-item:hover .timeline-content {
-         transform: translateY(-5px);
-         border-color: var(--gold);
-         box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3),
-                     0 0 40px rgba(212, 175, 55, 0.1);
-     }
-   
-     .value-timeline-item:nth-child(odd) .timeline-content {
-         margin-right: 2.5rem;
-     }
-   
-     .value-timeline-item:nth-child(even) .timeline-content {
-         margin-left: 2.5rem;
-     }
-   
-     .timeline-content::before {
-         content: '';
-         position: absolute;
-         top: 2rem;
-         width: 0;
-         height: 0;
-         border-style: solid;
-     }
-   
-     .value-timeline-item:nth-child(odd) .timeline-content::before {
-         right: -10px;
-         border-width: 10px 0 10px 10px;
-         border-color: transparent transparent transparent rgba(34, 34, 34, 0.8);
-     }
-   
-     .value-timeline-item:nth-child(even) .timeline-content::before {
-         left: -10px;
-         border-width: 10px 10px 10px 0;
-         border-color: transparent rgba(34, 34, 34, 0.8) transparent transparent;
-     }
-   
-     .timeline-number {
-         position: absolute;
-         top: -20px;
-         font-family: 'Montserrat', sans-serif;
-         font-size: 3rem;
-         font-weight: 900;
-         color: rgba(212, 175, 55, 0.1);
-         z-index: 1;
-     }
-   
-     .value-timeline-item:nth-child(odd) .timeline-number {
-         right: 2rem;
-     }
-   
-     .value-timeline-item:nth-child(even) .timeline-number {
-         left: 2rem;
-     }
-   
-     .timeline-icon {
-         width: 50px;
-         height: 50px;
-         background: linear-gradient(135deg,
-             rgba(212, 175, 55, 0.1),
-             rgba(245, 209, 115, 0.05));
-         border-radius: 12px;
-         display: flex;
-         align-items: center;
-         justify-content: center;
-         margin-bottom: 1.5rem;
-         color: var(--gold);
-         font-size: 1.3rem;
-         transition: all 0.4s ease;
-     }
-   
-     .value-timeline-item:hover .timeline-icon {
-         transform: rotate(15deg) scale(1.1);
-         background: linear-gradient(135deg, var(--gold), var(--gold-light));
-         color: var(--black);
-     }
-   
-     .timeline-title {
-         font-size: 1.3rem;
-         margin-bottom: 1rem;
-         color: var(--white);
-         position: relative;
-         padding-bottom: 0.5rem;
-     }
-   
-     .timeline-title::after {
-         content: '';
-         position: absolute;
-         bottom: 0;
-         left: 0;
-         width: 40px;
-         height: 2px;
-         background: linear-gradient(90deg, var(--gold), transparent);
-         transition: width 0.4s ease;
-     }
-   
-     .value-timeline-item:hover .timeline-title::after {
-         width: 60px;
-         background: linear-gradient(90deg, var(--gold), var(--gold-light));
-     }
-   
-     .timeline-desc {
-         color: var(--text-gray);
-         font-size: 0.95rem;
-         line-height: 1.7;
-     }
-   
-    /* Premium Dark Overlay */
-#services .section-bg::before {
-   background: linear-gradient(
-       180deg,
-       rgba(10,10,10,0.92) 0%,
-       rgba(10,10,10,0.95) 50%,
-       rgba(10,10,10,0.92) 100%
-   );
-}
-/* Center Gold Glow (WOW effect) */
-#services::after {
-   content: "";
-   position: absolute;
-   top: 50%;
-   left: 50%;
-   width: 700px;
-   height: 700px;
-   transform: translate(-50%, -50%);
-   background: radial-gradient(circle, rgba(212,175,55,0.10), transparent 70%);
-   z-index: 1;
-}
-     .service-card {
-   background: rgba(20, 20, 20, 0.85);
-   border-radius: 22px;
-   padding: 2.8rem 2rem;
-   border: 1px solid rgba(212,175,55,0.15);
-   backdrop-filter: blur(12px);
-   transition: all 0.4s ease;
-   text-align: center;
-   position: relative;
-   overflow: hidden;
-}
-  .service-card::before {
-   content: "";
-   position: absolute;
-   top: -50%;
-   left: -50%;
-   width: 200%;
-   height: 200%;
-   background: radial-gradient(circle, rgba(212,175,55,0.08), transparent 60%);
-   opacity: 0;
-   transition: opacity 0.4s ease;
-} 
-    .service-card:hover {
-   transform: translateY(-15px) scale(1.02);
-   border-color: rgba(212,175,55,0.6);
-   box-shadow:
-       0 30px 60px rgba(0,0,0,0.6),
-       0 0 40px rgba(212,175,55,0.25);
-}
-   
-     .service-image {
-         width: 120px;
-         height: 120px;
-         margin: 0 auto 1.5rem;
-         border-radius: 50%;
-         overflow: hidden;
-         border: 3px solid rgba(212, 175, 55, 0.3);
-         transition: all 0.4s ease;
-     }
-   
-     .service-card:hover .service-image {
-         transform: scale(1.1);
-         border-color: var(--gold);
-     }
-   
-     .service-image img {
-         width: 100%;
-         height: 100%;
-         object-fit: cover;
-         transition: transform 0.4s ease;
-     }
-   
-     .service-card:hover .service-image img {
-         transform: scale(1.1);
-     }
-   
-     .service-card h3 {
-         font-size: 1.3rem;
-         margin-bottom: 1rem;
-     }
-   
-     .service-card p {
-         font-size: 0.95rem;
-         margin-bottom: 1.5rem;
-         color: var(--text-gray);
-     }
-   
-     .service-card .btn-gold {
-         padding: 0.8rem 1.5rem;
-         font-size: 0.9rem;
-     }
-    
-     .service-card:hover::before {
-   opacity: 1;
-}
-     /* ===== WOW MISSION SECTION (Premium No Box Style) ===== */
-.wow-mission-section {
-   padding: 3rem 0 1rem 0;   /* less bottom space */
-}
-.wow-mission-content {
-   max-width: 900px;
-   margin: auto;
-   text-align: center;
-}
-/* Small label */
-.wow-mission-label {
-   font-size: 1.1rem;
-   letter-spacing: 6px;
-   font-weight: 800;
-   text-transform: uppercase;
-   margin-bottom: 1.5rem;
-   /* Gold Gradient Text */
-   background: linear-gradient(135deg, #d4af37, #f5d173);
-   -webkit-background-clip: text;
-   -webkit-text-fill-color: transparent;
-   /* Premium glow effect */
-   text-shadow: 0 0 20px rgba(212,175,55,0.25);
-}
-/* Big Premium Title */
-.wow-mission-title {
-   font-size: 2.8rem;
-   font-weight: 900;
-   line-height: 1.3;
-   margin-bottom: 2rem;
-   color: #fff;
-}
-.wow-mission-title span {
-   background: linear-gradient(135deg,#d4af37,#f5d173);
-   -webkit-background-clip: text;
-   -webkit-text-fill-color: transparent;
-}
-/* Text */
-.wow-mission-text {
-   font-size: 1.1rem;
-   line-height: 1.9;
-   color: #a8a8a8;
-   margin-bottom: 1.5rem;
-}
-/* Subtle center glow effect */
-.wow-mission-section::before {
-   content: "";
-   position: absolute;
-   top: 50%;
-   left: 50%;
-   width: 600px;
-   height: 600px;
-   transform: translate(-50%, -50%);
-   background: radial-gradient(circle, rgba(212,175,55,0.08), transparent 70%);
-   z-index: 0;
-}
-.wow-mission-label::after {
-   content: "";
-   display: block;
-   width: 60px;
-   height: 2px;
-   margin: 10px auto 0;
-   background: linear-gradient(90deg, transparent, #d4af37, transparent);
-}
-.wow-mission-content {
-   position: relative;
-   z-index: 2;
-}
-/* Responsive */
-@media(max-width:768px){
-   .wow-mission-title{
-       font-size: 2rem;
-   }
-   .wow-mission-text{
-       font-size: 1rem;
-   }
-}
-    
-   
-     /* Stats Section */
-     .stats-section {
-         min-height: 50vh;
-     }
-   
-     #stats .section-bg::before {
-         background: linear-gradient(135deg, rgba(10, 10, 10, 0.78) 0%, rgba(26, 26, 26, 0.82) 100%);
-     }
-   
-     .stat-item {
-         text-align: center;
-         padding: 1.5rem;
-     }
-   
-     .stat-number {
-         font-size: 3rem;
-         font-weight: 900;
-         margin-bottom: 0.5rem;
-         background: linear-gradient(135deg, var(--gold), var(--gold-light));
-         -webkit-background-clip: text;
-         -webkit-text-fill-color: transparent;
-     }
-   
-     .stat-label {
-         color: var(--text-gray);
-         font-size: 0.9rem;
-         font-weight: 500;
-         text-transform: uppercase;
-         letter-spacing: 1px;
-     }
-   
-     /* CTA Section */
-     #cta .section-bg::before {
-         background: linear-gradient(135deg, rgba(10, 10, 10, 0.75) 0%, rgba(26, 26, 26, 0.78) 100%);
-     }
-   
-     .cta-content {
-         position: relative;
-         z-index: 2;
-         text-align: center;
-         padding: 2rem 0;
-     }
-   
-     /* Footer */
-     .footer {
-         background: var(--black);
-         padding: 4rem 0 2rem;
-         border-top: 1px solid var(--border-color);
-     }
-   
-     .footer-logo {
-         font-family: 'Montserrat', sans-serif;
-         font-size: 1.6rem;
-         font-weight: 900;
-         background: linear-gradient(135deg, var(--gold), var(--gold-light));
-         -webkit-background-clip: text;
-         -webkit-text-fill-color: transparent;
-         margin-bottom: 1.5rem;
-         display: inline-block;
-     }
-   
-     .footer-text {
-         color: var(--text-gray);
-         font-size: 0.9rem;
-         line-height: 1.7;
-         margin-bottom: 2rem;
-         max-width: 300px;
-     }
-   
-     .social-links {
-         display: flex;
-         gap: 1rem;
-         margin-top: 1.5rem;
-     }
-   
-     .social-link {
-         width: 36px;
-         height: 36px;
-         border-radius: 50%;
-         background: rgba(255, 255, 255, 0.05);
-         display: flex;
-         align-items: center;
-         justify-content: center;
-         color: var(--gold);
-         text-decoration: none;
-         transition: all 0.3s ease;
-         border: 1px solid var(--border-color);
-     }
-   
-     .social-link:hover {
-         background: var(--gold);
-         color: var(--black);
-         transform: translateY(-3px);
-     }
-   
-     .footer-heading {
-         color: var(--gold-light);
-         font-size: 1rem;
-         font-weight: 600;
-         margin-bottom: 1.2rem;
-     }
-   
-     .footer-links {
-         list-style: none;
-         padding: 0;
-         margin: 0;
-     }
-   
-     .footer-links li {
-         margin-bottom: 0.6rem;
-     }
-   
-     .footer-links a {
-         color: var(--text-gray);
-         text-decoration: none;
-         font-size: 0.9rem;
-         transition: all 0.3s ease;
-         display: flex;
-         align-items: center;
-         gap: 0.5rem;
-     }
-   
-     .footer-links a:hover {
-         color: var(--gold-light);
-         transform: translateX(5px);
-     }
-   
-     .copyright {
-         text-align: center;
-         margin-top: 3rem;
-         padding-top: 1.5rem;
-         border-top: 1px solid rgba(255, 255, 255, 0.05);
-         color: var(--text-gray);
-         font-size: 0.85rem;
-     }
-   
-     /* Animation Classes */
-     .fade-in {
-         opacity: 0;
-         transform: translateY(20px);
-         animation: fadeIn 0.8s ease forwards;
-     }
-   
-     @keyframes fadeIn {
-         to {
-             opacity: 1;
-             transform: translateY(0);
-         }
-     }
-   
-     .delay-1 {
-         animation-delay: 0.2s;
-     }
-   
-     .delay-2 {
-         animation-delay: 0.4s;
-     }
-   
-     .delay-3 {
-         animation-delay: 0.6s;
-     }
-   
-     .delay-4 {
-         animation-delay: 0.8s;
-     }
-   
-     /* Carousel Slide Animations */
-     .slide-in-right {
-         animation: slideInRight 1s ease-out forwards;
-     }
-   
-     @keyframes slideInRight {
-         from {
-             opacity: 0;
-             transform: translateX(100px);
-         }
-         to {
-             opacity: 1;
-             transform: translateX(0);
-         }
-     }
-   
-     .slide-in-left {
-         animation: slideInLeft 1s ease-out forwards;
-     }
-   
-     @keyframes slideInLeft {
-         from {
-             opacity: 0;
-             transform: translateX(-100px);
-         }
-         to {
-             opacity: 1;
-             transform: translateX(0);
-         }
-     }
-   
-     .slide-in-up {
-         animation: slideInUp 1s ease-out forwards;
-     }
-   
-     @keyframes slideInUp {
-         from {
-             opacity: 0;
-             transform: translateY(100px);
-         }
-         to {
-             opacity: 1;
-             transform: translateY(0);
-         }
-     }
-   
-     /* Scroll Progress Indicator */
-     .scroll-progress {
-         position: fixed;
-         top: 0;
-         left: 0;
-         width: 0%;
-         height: 3px;
-         background: linear-gradient(135deg, var(--gold), var(--gold-light));
-         z-index: 1001;
-         transition: width 0.3s ease;
-     }
-   
-     /* Performance Optimizations */
-     .will-change {
-         will-change: transform, opacity;
-     }
-   
-     /* Reduce motion for accessibility */
-     @media (prefers-reduced-motion: reduce) {
-         *,
-         *::before,
-         *::after {
-             animation-duration: 0.01ms !important;
-             animation-iteration-count: 1 !important;
-             transition-duration: 0.01ms !important;
-         }
-     }
-   
-     /* Responsive Design */
-     @media (max-width: 1200px) {
-         .hero-title {
-             font-size: 3.2rem;
-         }
-       
-         .feature-showcase {
-             grid-template-columns: repeat(2, 1fr);
-         }
-       
-        #services .section-title {
-   font-size: 3rem;
-   font-weight: 900;
-   margin-bottom: 1rem;
-}
-     }
-   
-     @media (max-width: 992px) {
-         .hero-title {
-             font-size: 2.8rem;
-         }
-       
-         .hero-subtitle {
-             font-size: 1.3rem;
-         }
-       
-         .section-title {
-             font-size: 2rem;
-         }
-       
-         section {
-             padding: 4rem 0;
-         }
-       
-         .story-section {
-             padding: 2.5rem;
-         }
-       
-         .mission-vision-grid {
-             grid-template-columns: 1fr;
-         }
-       
-         /* Timeline Responsive */
-         .values-timeline::before {
-             left: 30px;
-         }
-       
-         .value-timeline-item {
-             justify-content: flex-start !important;
-         }
-       
-         .value-timeline-item .timeline-content {
-             width: calc(100% - 60px);
-             margin-left: 60px !important;
-             margin-right: 0 !important;
-         }
-       
-         .timeline-dot {
-             left: 30px;
-         }
-       
-         .value-timeline-item:nth-child(odd) .timeline-content::before {
-             left: -10px;
-             right: auto;
-             border-width: 10px 10px 10px 0;
-             border-color: transparent rgba(34, 34, 34, 0.8) transparent transparent;
-         }
-       
-         .value-timeline-item:nth-child(odd) .timeline-number {
-             left: 2rem;
-             right: auto;
-         }
-       
-         .modern-features-section {
-             padding: 4rem 0;
-         }
-       
-         .feature-showcase-content {
-             padding: 2rem 1.5rem;
-         }
-     }
-   
-     @media (max-width: 768px) {
-         .hero-title {
-             font-size: 2.4rem;
-         }
-       
-         .hero-subtitle {
-             font-size: 1.1rem;
-         }
-       
-         .hero-text {
-             font-size: 1rem;
-         }
-       
-         .section-title {
-             font-size: 1.8rem;
-         }
-       
-         .story-section {
-             padding: 2rem;
-         }
-       
-         .nav-logo {
-             font-size: 1.5rem;
-         }
-       
-         .nav-link {
-             padding: 0.5rem !important;
-             font-size: 0.9rem;
-         }
-       
-         .btn-gold {
-             padding: 0.8rem 2rem;
-             font-size: 0.95rem;
-         }
-       
-         .stat-number {
-             font-size: 2.5rem;
-         }
-       
-         .mission-card, .vision-card {
-             padding: 2rem;
-         }
-       
-         .service-card {
-             padding: 2rem 1.5rem;
-         }
-       
-         .modern-features-section {
-             padding: 3rem 0;
-         }
-       
-         .feature-showcase {
-             grid-template-columns: 1fr;
-             gap: 1.5rem;
-         }
-       
-         .feature-showcase-number {
-             top: 1.5rem;
-             right: 1.5rem;
-         }
-       
-         .number-glow {
-             font-size: 2rem;
-         }
-       
-         .feature-showcase-icon {
-             width: 50px;
-             height: 50px;
-             border-radius: 12px;
-         }
-       
-         .feature-showcase-title {
-             font-size: 1.2rem;
-         }
-       
-         .carousel-controls {
-             bottom: 30px;
-         }
-       
-         .values-title {
-             font-size: 2rem;
-         }
-       
-         .values-timeline {
-             padding: 2rem 0;
-         }
-       
-         .timeline-content {
-             padding: 1.5rem;
-         }
-       
-         .timeline-icon {
-             width: 45px;
-             height: 45px;
-             font-size: 1.2rem;
-             margin-bottom: 1rem;
-         }
-       
-         .timeline-title {
-             font-size: 1.2rem;
-         }
-     }
-   
-     @media (max-width: 576px) {
-         .hero-title {
-             font-size: 2rem;
-         }
-       
-         .hero-subtitle {
-             font-size: 1rem;
-         }
-       
-         .hero-text {
-             font-size: 0.95rem;
-             margin-bottom: 2rem;
-         }
-       
-         .section-title {
-             font-size: 1.6rem;
-         }
-       
-         .container {
-             padding: 0 1rem;
-         }
-       
-         .story-title {
-             font-size: 1.5rem;
-         }
-       
-         .service-image {
-             width: 100px;
-             height: 100px;
-         }
-       
-         .feature-showcase-content {
-             padding: 1.5rem 1rem;
-         }
-       
-         .feature-showcase-number {
-             top: 1.2rem;
-             right: 1.2rem;
-         }
-       
-         .number-glow {
-             font-size: 1.8rem;
-         }
-       
-         .feature-showcase-icon {
-             width: 44px;
-             height: 44px;
-             margin-bottom: 1.2rem;
-         }
-       
-         .feature-showcase-title {
-             font-size: 1.1rem;
-         }
-       
-         .feature-showcase-desc {
-             font-size: 0.85rem;
-         }
-       
-         .feature-showcase-tag {
-             padding: 0.4rem 0.8rem;
-             font-size: 0.75rem;
-         }
-       
-         .footer {
-             padding: 3rem 0 1.5rem;
-         }
-       
-         .carousel-content {
-             padding: 0 1rem;
-         }
-       
-         .carousel-controls {
-             bottom: 20px;
-         }
-       
-         .carousel-dot {
-             width: 10px;
-             height: 10px;
-         }
-       
-         .btn-gold {
-             padding: 0.7rem 1.5rem;
-             font-size: 0.9rem;
-         }
-       
-         .values-title {
-             font-size: 1.8rem;
-         }
-       
-         .values-subtitle {
-             font-size: 1rem;
-         }
-       
-         .value-timeline-item {
-             margin-bottom: 3rem;
-         }
-       
-         .value-timeline-item .timeline-content {
-             width: calc(100% - 50px);
-             margin-left: 50px !important;
-         }
-       
-         .timeline-dot {
-             width: 16px;
-             height: 16px;
-             left: 25px;
-         }
-       
-         .timeline-number {
-             font-size: 2.5rem;
-         }
-       
-         .timeline-content {
-             padding: 1.25rem;
-         }
-     }
-   
-     @media (max-width: 400px) {
-         .hero-title {
-             font-size: 1.8rem;
-         }
-       
-         .hero-subtitle {
-             font-size: 0.9rem;
-         }
-       
-         .d-flex.flex-wrap {
-             flex-direction: column;
-             gap: 1rem !important;
-         }
-       
-         .btn-gold {
-             width: 100%;
-             justify-content: center;
-         }
-       
-         .values-timeline::before {
-             left: 20px;
-         }
-       
-         .value-timeline-item .timeline-content {
-             width: calc(100% - 40px);
-             margin-left: 40px !important;
-         }
-       
-         .timeline-dot {
-             left: 20px;
-         }
-     }
- </style>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Amentrop | Premium Campus Placement Platform</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#353534",
+                        "on-error": "#690005",
+                        "background": "#131313",
+                        "on-surface-variant": "#d0c5af",
+                        "surface-dim": "#131313",
+                        "secondary-container": "#474746",
+                        "on-surface": "#e5e2e1",
+                        "surface-container-lowest": "#0e0e0e",
+                        "tertiary": "#d0cdd0",
+                        "on-secondary-container": "#b7b5b4",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "outline-variant": "#4d4635",
+                        "on-primary-container": "#554300",
+                        "surface": "#131313",
+                        "surface-tint": "#e9c349",
+                        "surface-container-highest": "#353534",
+                        "primary-fixed": "#ffe088",
+                        "primary-container": "#d4af37",
+                        "primary-fixed-dim": "#e9c349",
+                        "inverse-primary": "#735c00",
+                        "on-secondary": "#303030",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-container": "#201f1f",
+                        "on-error-container": "#ffdad6",
+                        "secondary": "#c8c6c5",
+                        "surface-bright": "#3a3939",
+                        "on-secondary-fixed-variant": "#474746",
+                        "surface-container-high": "#2a2a2a",
+                        "error": "#ffb4ab",
+                        "tertiary-container": "#b4b2b4",
+                        "on-tertiary-container": "#454547",
+                        "inverse-on-surface": "#313030",
+                        "on-primary-fixed-variant": "#574500",
+                        "surface-container-low": "#1c1b1b",
+                        "tertiary-fixed-dim": "#c8c6c8",
+                        "on-tertiary-fixed": "#1b1b1d",
+                        "secondary-fixed": "#e5e2e1",
+                        "primary": "#f2ca50",
+                        "on-background": "#e5e2e1",
+                        "error-container": "#93000a",
+                        "on-tertiary": "#303032",
+                        "on-primary": "#3c2f00",
+                        "on-primary-fixed": "#241a00",
+                        "tertiary-fixed": "#e4e2e4",
+                        "on-secondary-fixed": "#1b1b1c",
+                        "on-tertiary-fixed-variant": "#474649",
+                        "outline": "#99907c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "base": "8px",
+                        "xxl": "48px",
+                        "md": "16px",
+                        "sm": "12px",
+                        "margin": "40px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "14px", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(25, 25, 25, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .gold-gradient-btn {
+            background: linear-gradient(180deg, #f2ca50 0%, #d4af37 100%);
+        }
+        .ghost-border {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-text-shadow {
+            text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+        .premium-blur {
+            backdrop-filter: blur(8px);
+        }
+    </style>
 </head>
-<body>
-  <!-- Scroll Progress Indicator -->
-  <div class="scroll-progress"></div>
-   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark">
-      <div class="container">
-          <a class="nav-logo" href="#">REESSENTIALS</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-              <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav ms-auto align-items-center">
-                  <li class="nav-item">
-                      <a class="nav-link active" href="#home">Home</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#about">About</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#services">Services</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#stats">Stats</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#cta">Get Started</a>
-                  </li>
-                  <li class="nav-item ms-2">
-                      <button class="btn btn-gold">Join Now</button>
-                  </li>
-              </ul>
-          </div>
-      </div>
-  </nav>
-  <!-- Enhanced Hero Section with Carousel -->
-  <section id="home" class="hero-section">
-      <div class="hero-carousel">
-          <!-- Carousel Progress Bar -->
-          <div class="carousel-progress" id="carouselProgress"></div>
-        
-          <!-- Carousel Items -->
-          <div class="carousel-inner">
-              <!-- Slide 1 -->
-              <div class="carousel-item active" data-slide="0">
-                  <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600"
-                       alt="Team Collaboration"
-                       class="carousel-bg"
-                       loading="lazy"
-                       width="2070"
-                       height="1380">
-                  <div class="carousel-content">
-                      <div class="container">
-                          <h1 class="hero-title slide-in-up" data-delay="0">
-                              Train Smarter. <span class="gold-gradient">Hire Faster.</span>
-                          </h1>
-                          <p class="hero-subtitle slide-in-up" data-delay="200">
-                              Skill-Based Training & Intelligent Hiring Platform
-                          </p>
-                          <p class="hero-text slide-in-up" data-delay="400">
-                              Transform students into industry-ready professionals and connect companies with
-                              <span class="gold-gradient" style="font-weight: 600;">pre-trained, verified candidates.</span>
-                              Bridge the gap between learning and employment.
-                          </p>
-                          <div class="d-flex flex-wrap justify-content-center gap-3 slide-in-up" data-delay="600">
-                              <button class="btn btn-gold">
-                                  <i class="fas fa-rocket me-2"></i> Start Your Career
-                              </button>
-                              <button class="btn btn-gold">
-                                  <i class="fas fa-briefcase me-2"></i> Hire Talent
-                              </button>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-            
-              <!-- Slide 2 -->
-              <div class="carousel-item" data-slide="1">
-                  <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=2070&q=80"
-                       alt="Professional Development"
-                       class="carousel-bg"
-                       loading="lazy"
-                       width="2070"
-                       height="1380">
-                  <div class="carousel-content">
-                      <div class="container">
-                          <h1 class="hero-title slide-in-left" data-delay="0">
-                              Industry-Ready <span class="gold-gradient">Professionals</span>
-                          </h1>
-                          <p class="hero-subtitle slide-in-left" data-delay="200">
-                              Comprehensive Training & Real-World Experience
-                          </p>
-                          <p class="hero-text slide-in-left" data-delay="400">
-                              Our candidates undergo rigorous training with hands-on projects, mentorship, and
-                              <span class="gold-gradient" style="font-weight: 600;">industry-aligned curriculum.</span>
-                              They graduate with portfolios that showcase real capabilities.
-                          </p>
-                          <div class="d-flex flex-wrap justify-content-center gap-3 slide-in-left" data-delay="600">
-                              <button class="btn btn-gold">
-                                  <i class="fas fa-graduation-cap me-2"></i> Explore Programs
-                              </button>
-                              <button class="btn btn-gold">
-                                  <i class="fas fa-chart-line me-2"></i> View Success Stories
-                              </button>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-            
-              <!-- Slide 3 -->
-              <div class="carousel-item" data-slide="2">
-                  <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=2070&q=80"
-                       alt="Data-Driven Hiring"
-                       class="carousel-bg"
-                       loading="lazy"
-                       width="2070"
-                       height="1380">
-                  <div class="carousel-content">
-                      <div class="container">
-                          <h1 class="hero-title slide-in-right" data-delay="0">
-                              Data-Driven <span class="gold-gradient">Hiring Solutions</span>
-                          </h1>
-                          <p class="hero-subtitle slide-in-right" data-delay="200">
-                              Smart Recruitment with Verified Skill Assessments
-                          </p>
-                          <p class="hero-text slide-in-right" data-delay="400">
-                              Access comprehensive candidate profiles with verified skills,
-                              <span class="gold-gradient" style="font-weight: 600;">performance analytics,</span>
-                              and project portfolios. Make informed hiring decisions faster than ever.
-                          </p>
-                          <div class="d-flex flex-wrap justify-content-center gap-3 slide-in-right" data-delay="600">
-                              <button class="btn btn-gold">
-                                  <i class="fas fa-search me-2"></i> Browse Candidates
-                              </button>
-                              <button class="btn btn-gold">
-                                  <i class="fas fa-calendar-check me-2"></i> Schedule Demo
-                              </button>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-            
-              <!-- Slide 4 -->
-              <div class="carousel-item" data-slide="3">
-                  <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600"
-                       alt="Global Talent Network"
-                       class="carousel-bg"
-                       loading="lazy"
-                       width="2070"
-                       height="1380">
-                  <div class="carousel-content">
-                      <div class="container">
-                          <h1 class="hero-title slide-in-up" data-delay="0">
-                              Global <span class="gold-gradient">Talent Network</span>
-                          </h1>
-                          <p class="hero-subtitle slide-in-up" data-delay="200">
-                              Connect with Top Talent Worldwide
-                          </p>
-                          <p class="hero-text slide-in-up" data-delay="400">
-                              Tap into our diverse pool of candidates from around the world,
-                              <span class="gold-gradient" style="font-weight: 600;">all pre-vetted and ready to contribute.</span>
-                              Find the perfect match for your team's unique needs.
-                          </p>
-                          <div class="d-flex flex-wrap justify-content-center gap-3 slide-in-up" data-delay="600">
-                              <button class="btn btn-gold">
-                                  <i class="fas fa-users me-2"></i> Join Network
-                              </button>
-                              <button class="btn btn-gold">
-                                  <i class="fas fa-handshake me-2"></i> Partner With Us
-                              </button>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-        
-          <!-- Carousel Controls -->
-          <div class="carousel-controls">
-              <div class="carousel-pagination">
-                  <div class="carousel-dot active" data-slide="0"></div>
-                  <div class="carousel-dot" data-slide="1"></div>
-                  <div class="carousel-dot" data-slide="2"></div>
-                  <div class="carousel-dot" data-slide="3"></div>
-              </div>
-          </div>
-      </div>
-  </section>
-  <!-- Modern Features Section -->
-  <div class="modern-features-section" id="features">
-      <div class="container">
-          <div class="feature-showcase">
-              <!-- Feature 1 -->
-              <div class="feature-showcase-item" data-aos="fade-up" data-aos-delay="100">
-                  <div class="feature-showcase-content">
-                      <div class="feature-showcase-number">
-                          <span class="number-glow">01</span>
-                          <div class="number-line"></div>
-                      </div>
-                      <div class="feature-showcase-icon">
-                          <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-                              <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2"/>
-                              <path d="M19 12C19 15.866 15.866 19 12 19C8.13401 19 5 15.866 5 12C5 8.13401 8.13401 5 12 5C15.866 5 19 8.13401 19 12Z" stroke="currentColor" stroke-width="2"/>
-                              <path d="M12 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                              <path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                              <path d="M4 12H2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                              <path d="M22 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                          </svg>
-                      </div>
-                      <h3 class="feature-showcase-title">
-                          Pre-Trained<br>Candidates
-                          <span class="title-line"></span>
-                      </h3>
-                      <p class="feature-showcase-desc">
-                          Industry-ready professionals with verified skills and portfolios
-                      </p>
-                      <div class="feature-showcase-tag">
-                          <i class="fas fa-check-circle"></i>
-                          <span>Verified Profiles</span>
-                      </div>
-                  </div>
-              </div>
-              <!-- Feature 2 -->
-              <div class="feature-showcase-item" data-aos="fade-up" data-aos-delay="200">
-                  <div class="feature-showcase-content">
-                      <div class="feature-showcase-number">
-                          <span class="number-glow">02</span>
-                          <div class="number-line"></div>
-                      </div>
-                      <div class="feature-showcase-icon">
-                          <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-                              <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                          </svg>
-                      </div>
-                      <h3 class="feature-showcase-title">
-                          Skill-Based<br>Hiring
-                          <span class="title-line"></span>
-                      </h3>
-                      <p class="feature-showcase-desc">
-                          Evaluate talent based on actual capabilities, not just resumes
-                      </p>
-                      <div class="feature-showcase-tag">
-                          <i class="fas fa-chart-bar"></i>
-                          <span>Data-Driven</span>
-                      </div>
-                  </div>
-              </div>
-              <!-- Feature 3 -->
-              <div class="feature-showcase-item" data-aos="fade-up" data-aos-delay="300">
-                  <div class="feature-showcase-content">
-                      <div class="feature-showcase-number">
-                          <span class="number-glow">03</span>
-                          <div class="number-line"></div>
-                      </div>
-                      <div class="feature-showcase-icon">
-                          <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-                              <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                              <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="currentColor" stroke-width="2"/>
-                              <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                              <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                          </svg>
-                      </div>
-                      <h3 class="feature-showcase-title">
-                          Diverse<br>Talent Pool
-                          <span class="title-line"></span>
-                      </h3>
-                      <p class="feature-showcase-desc">
-                          Access freshers and experienced professionals worldwide
-                      </p>
-                      <div class="feature-showcase-tag">
-                          <i class="fas fa-globe-americas"></i>
-                          <span>Global Network</span>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-  <!-- Enhanced About Section -->
-  <section id="about" class="about-section">
-      <!-- Full Page Background -->
-      <div class="section-bg">
-          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-               alt="Team Collaboration and Strategy"
-               loading="lazy"
-               width="2070"
-               height="1380">
-      </div>
-      <div class="container section-content">
-          <div class="about-header" data-aos="fade-up">
-              <div class="about-badge" data-aos="fade-up" data-aos-delay="100">
-                  <i class="fas fa-star me-2"></i> About Reessentials
-              </div>
-              <h2 class="section-title" data-aos="fade-up" data-aos-delay="200">
-                  Transforming <span class="gold-gradient">Education</span> into <span class="gold-gradient">Employment</span>
-              </h2>
-              <p class="section-subtitle" data-aos="fade-up" data-aos-delay="300">
-                  Bridging the gap between academic learning and industry requirements
-              </p>
-          </div>
-        
-          <div class="about-content">
-              <!-- Story Section -->
-              <div class="story-section" data-aos="fade-up">
-                  <h3 class="story-title">Our Story</h3>
-                  <p class="story-text">
-                      Reessentials was founded with a clear vision: to solve the critical gap between academic education and industry requirements. We recognized that while millions of students graduate each year, thousands of positions remain unfilled because candidates lack the practical skills employers need.
-                  </p>
-                  <p class="story-text">
-                      Today, we've evolved into a comprehensive platform that not only trains students with industry-relevant skills but also provides companies with access to verified, job-ready talent. Our integrated approach ensures that every candidate we train meets the highest standards of industry readiness.
-                  </p>
-              </div>
-            
-              <!-- WOW Mission Section (No Boxes) -->
-<div class="wow-mission-section" data-aos="fade-up">
-   <div class="wow-mission-content">
-       <div class="wow-mission-label">
-           OUR MISSION
-       </div>
-       <h2 class="wow-mission-title">
-           Building a world where <span>skills</span> matter more than resumes.
-       </h2>
-       <p class="wow-mission-text">
-           At Reessentials, our mission is to transform graduates into
-           <strong class="gold-gradient">industry-ready professionals</strong>
-           through real-world training, verified skill assessments, and
-           data-driven learning paths.
-       </p>
-       <p class="wow-mission-text">
-           We help companies hire faster by providing
-           <strong class="gold-gradient">pre-trained, performance-verified talent</strong>,
-           reducing hiring risk and accelerating business growth.
-       </p>
-   </div>
+<body class="antialiased overflow-x-hidden">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-black/70 backdrop-blur-2xl border-b border-white/5">
+
+    <div class="max-w-[1440px] mx-auto px-margin h-24 flex items-center justify-between">
+
+        <!-- Brand -->
+        <a href="/" class="flex items-center gap-5 group">
+
+            <!-- Logo -->
+            <div class="relative flex items-center justify-center">
+
+                <!-- Glow -->
+                <div class="absolute inset-0 bg-primary/20 blur-2xl rounded-full 
+                            opacity-0 group-hover:opacity-100 transition-all duration-500">
+                </div>
+
+                <img src="/assets/images/logo/logo.jpg"
+                     alt="Amentrop Logo"
+                     class="relative h-16 md:h-20 w-auto object-contain
+                            transition-all duration-300
+                            group-hover:scale-105"/>
+
+            </div>
+
+            <!-- Brand Text -->
+            <div class="flex flex-col leading-none">
+
+                <span class="text-[38px] md:text-[42px] font-bold 
+                             tracking-[-0.05em]
+                             text-white group-hover:text-primary
+                             transition-colors duration-300">
+
+                    Amentrop
+
+                </span>
+
+                <span class="text-[11px] uppercase tracking-[0.35em]
+                             text-white/55 mt-1">
+
+                    Premium Placement Platform
+
+                </span>
+
+            </div>
+
+        </a>
+
+    </div>
+
+</nav>
+<main>
+<!-- Redesigned Hero Section -->
+<section class="relative min-h-[90vh] flex flex-col items-center justify-center text-center px-margin py-xxl overflow-hidden">
+<!-- Background Layer -->
+<div class="absolute inset-0 z-0">
+<img alt="Premium cinematic obsidian architecture with golden lighting" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC91QeLQt8TIFFexqfl2m4593QBBuxs-qmkbbJA81yRUYKy1_X3V9Q0dMK6ptxf60KV6cvw7BXbkdxmwDnr5FCRuSgHw18YGRoOrRB6F_MCekXJwH_Ha_kuRE2_799yrzw0cy69XJIDVMo0OKhpwOrstS6CsFbLy7dMWChFrcjjXFxGotPL86jxprXDMBFhjPbAz36Z8R3K3E77e3clrqOGNDeJ-0_VHiKIZRNLZroX2ibDwmqXQZBvEtxRF9784j2DA8hLxKJlwZAY"/>
+<div class="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background"></div>
 </div>
-               <!-- NEW REDESIGNED CORE VALUES SECTION -->
-              <div class="values-section" data-aos="fade-up" data-aos-delay="400">
-                  <div class="values-header">
-                      <h3 class="values-title">Our Guiding Principles</h3>
-                      <p class="values-subtitle">
-                          The foundation of everything we do at Reessentials - designed to create lasting impact
-                      </p>
-                  </div>
-                
-                  <div class="values-timeline">
-                      <!-- Value 1 -->
-                      <div class="value-timeline-item">
-                          <div class="timeline-dot"></div>
-                          <div class="timeline-content">
-                              <div class="timeline-number">01</div>
-                              <div class="timeline-icon">
-                                  <i class="fas fa-trophy"></i>
-                              </div>
-                              <h4 class="timeline-title">Excellence Redefined</h4>
-                              <p class="timeline-desc">
-                                  We don't just meet industry standards - we set them. Our commitment to quality transforms ordinary training into extraordinary career launches.
-                              </p>
-                          </div>
-                      </div>
-                    
-                      <!-- Value 2 -->
-                      <div class="value-timeline-item">
-                          <div class="timeline-dot"></div>
-                          <div class="timeline-content">
-                              <div class="timeline-number">02</div>
-                              <div class="timeline-icon">
-                                  <i class="fas fa-bolt"></i>
-                              </div>
-                              <h4 class="timeline-title">Innovation First</h4>
-                              <p class="timeline-desc">
-                                  Constantly pushing boundaries with cutting-edge technology, AI-driven solutions, and creative approaches to bridge the skills gap.
-                              </p>
-                          </div>
-                      </div>
-                    
-                      <!-- Value 3 -->
-                      <div class="value-timeline-item">
-                          <div class="timeline-dot"></div>
-                          <div class="timeline-content">
-                              <div class="timeline-number">03</div>
-                              <div class="timeline-icon">
-                                  <i class="fas fa-chart-line"></i>
-                              </div>
-                              <h4 class="timeline-title">Impact Driven</h4>
-                              <p class="timeline-desc">
-                                  Measuring success by careers transformed, businesses empowered, and meaningful change created in the global employment landscape.
-                              </p>
-                          </div>
-                      </div>
-                    
-                      <!-- Value 4 -->
-                      <div class="value-timeline-item">
-                          <div class="timeline-dot"></div>
-                          <div class="timeline-content">
-                              <div class="timeline-number">04</div>
-                              <div class="timeline-icon">
-                                  <i class="fas fa-users"></i>
-                              </div>
-                              <h4 class="timeline-title">Community Focused</h4>
-                              <p class="timeline-desc">
-                                  Building thriving ecosystems where learners, mentors, and companies collaborate, grow, and succeed together beyond individual transactions.
-                              </p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </section>
-  <!-- Services Section -->
-  <section id="services" class="services-section">
-      <!-- Full Page Background -->
-      <div class="section-bg">
-          <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-               alt="Modern Business Services and Technology"
-               loading="lazy"
-               width="2070"
-               height="1380">
-      </div>
-      <div class="container section-content">
-          <div class="row">
-              <div class="col-12 text-center mb-5" data-aos="fade-up">
-                  <h2 class="section-title">Our Services</h2>
-                  <p class="section-subtitle">Comprehensive Solutions for Students and Companies</p>
-              </div>
-          </div>
-        
-          <div class="row g-4">
-              <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                  <div class="service-card">
-                      <div class="service-image">
-                          <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-                               alt="Student Training"
-                               loading="lazy"
-                               width="2070"
-                               height="1380">
-                      </div>
-                      <h3 class="gold-gradient">For Students</h3>
-                      <p>
-                          Industry-aligned training programs with hands-on projects, mentorship,
-                          and guaranteed placement assistance.
-                      </p>
-                      <a href="#" class="btn btn-gold">
-                          Explore Programs <i class="fas fa-arrow-right"></i>
-                      </a>
-                  </div>
-              </div>
-            
-              <div class="col-lg-4" data-aos="fade-up" data-aos-delay="400">
-                  <div class="service-card">
-                      <div class="service-image">
-                          <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80"
-                               alt="HR Hiring"
-                               loading="lazy"
-                               width="2069"
-                               height="1380">
-                      </div>
-                      <h3 class="gold-gradient">For HR Professionals</h3>
-                      <p>
-                          Access to pre-screened, verified candidates with complete portfolios
-                          and skill assessments.
-                      </p>
-                      <a href="#" class="btn btn-gold">
-                          Hire Talent <i class="fas fa-arrow-right"></i>
-                      </a>
-                  </div>
-              </div>
-            
-              <div class="col-lg-4" data-aos="fade-up" data-aos-delay="600">
-                  <div class="service-card">
-                      <div class="service-image">
-                          <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2073&q=80"
-                               alt="Process Optimization"
-                               loading="lazy"
-                               width="2073"
-                               height="1380">
-                      </div>
-                      <h3 class="gold-gradient">Process Optimization</h3>
-                      <p>
-                          Streamlined hiring process with verified skill assessments,
-                          video interviews, and performance analytics.
-                      </p>
-                      <a href="#" class="btn btn-gold">
-                          View Process <i class="fas fa-arrow-right"></i>
-                      </a>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </section>
-  <!-- Stats Section -->
-  <section id="stats" class="stats-section">
-      <!-- Full Page Background -->
-      <div class="section-bg">
-          <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-               alt="Data Analytics and Statistics"
-               loading="lazy"
-               width="2070"
-               height="1380">
-      </div>
-      <div class="container section-content">
-          <div class="row">
-              <div class="col-md-3 col-6 mb-4" data-aos="fade-up" data-aos-delay="200">
-                  <div class="stat-item">
-                      <div class="stat-number" data-count="500">500+</div>
-                      <div class="stat-label">Partner Companies</div>
-                  </div>
-              </div>
-              <div class="col-md-3 col-6 mb-4" data-aos="fade-up" data-aos-delay="300">
-                  <div class="stat-item">
-                      <div class="stat-number" data-count="15000">15K+</div>
-                      <div class="stat-label">Trained Candidates</div>
-                  </div>
-              </div>
-              <div class="col-md-3 col-6 mb-4" data-aos="fade-up" data-aos-delay="400">
-                  <div class="stat-item">
-                      <div class="stat-number" data-count="94">94%</div>
-                      <div class="stat-label">Placement Rate</div>
-                  </div>
-              </div>
-              <div class="col-md-3 col-6 mb-4" data-aos="fade-up" data-aos-delay="500">
-                  <div class="stat-item">
-                      <div class="stat-number" data-count="60">60%</div>
-                      <div class="stat-label">Faster Hiring</div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </section>
-  <!-- CTA Section -->
-  <section id="cta" class="cta-section">
-      <!-- Full Page Background -->
-      <div class="section-bg">
-          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80"
-               alt="Successful Career and Business Growth"
-               loading="lazy"
-               width="2071"
-               height="1380">
-      </div>
-      <div class="container section-content">
-          <div class="row justify-content-center">
-              <div class="col-lg-8 text-center cta-content" data-aos="zoom-in">
-                  <h2 class="section-title mb-4">Ready to Transform Your Career or Hiring Process?</h2>
-                  <p class="hero-text mb-5">
-                      Join thousands of successful candidates and companies who have transformed
-                      their careers and hiring processes with Reessentials.
-                  </p>
-                  <div class="d-flex flex-wrap justify-content-center gap-3">
-                      <button class="btn btn-gold btn-lg">
-                          <i class="fas fa-user-graduate me-2"></i> Start Your Journey
-                      </button>
-                      <button class="btn btn-gold btn-lg">
-                          <i class="fas fa-building me-2"></i> Request Demo
-                      </button>
-                  </div>
-                  <div class="mt-5">
-                      <p style="color: var(--text-gray); font-size: 0.95rem;">
-                          <i class="fas fa-shield-alt me-2 gold-gradient"></i>
-                          Trusted by Fortune 500 companies and leading educational institutions
-                      </p>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </section>
-  <!-- Footer -->
-  <footer id="contact" class="footer">
-      <div class="container">
-          <div class="row g-5">
-              <div class="col-lg-4">
-                  <a href="#" class="footer-logo">REESSENTIALS</a>
-                  <p class="footer-text">
-                      Transforming education into employment through innovative
-                      skill-based training and smart hiring solutions.
-                  </p>
-                  <div class="social-links">
-                      <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                      <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                      <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                      <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                  </div>
-              </div>
-            
-            
-            
-              <div class="col-lg-3 col-md-6">
-                  <h5 class="footer-heading">Contact Info</h5>
-                  <ul class="footer-links">
-                      <li>
-                          <a href="#">
-                              <i class="fas fa-map-marker-alt"></i>
-                              <span>123 Business Avenue, Tech City</span>
-                          </a>
-                      </li>
-                      <li>
-                          <a href="tel:+15551234567">
-                              <i class="fas fa-phone"></i>
-                              <span>+1 (555) 123-4567</span>
-                          </a>
-                      </li>
-                      <li>
-                          <a href="mailto:info@reessentials.com">
-                              <i class="fas fa-envelope"></i>
-                              <span>info@reessentials.com</span>
-                          </a>
-                      </li>
-                  </ul>
-              </div>
-            
-              <div class="col-lg-3">
-                  <h5 class="footer-heading">Newsletter</h5>
-                  <p style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1.5rem;">
-                      Subscribe for updates and insights
-                  </p>
-                  <div class="input-group">
-                      <input type="email"
-                             class="form-control bg-dark border-dark text-light"
-                             placeholder="Your Email"
-                             style="border: 1px solid var(--border-color); border-right: none;">
-                      <button class="btn btn-gold" style="padding: 0.8rem 1.5rem;">
-                          <i class="fas fa-paper-plane"></i>
-                      </button>
-                  </div>
-              </div>
-          </div>
-        
-          <div class="copyright">
-              <p>&copy; 2024 Reessentials. All rights reserved. |
-                  <a href="#" style="color: var(--gold); text-decoration: none;">Privacy Policy</a> |
-                  <a href="#" style="color: var(--gold); text-decoration: none;">Terms of Service</a>
-              </p>
-          </div>
-      </div>
-  </footer>
-  <!-- Scripts (Deferred) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-      // Performance optimization: Load non-critical CSS
-      document.addEventListener('DOMContentLoaded', function() {
-          // Add loaded class to body for CSS animations
-          document.body.classList.add('js-loaded');
-        
-          // Load full CSS
-          const fullCSS = document.getElementById('full-css');
-          if (fullCSS) {
-              fullCSS.media = 'all';
-          }
-        
-          // Lazy load background images
-          function lazyLoadBackgrounds() {
-              const bgImages = document.querySelectorAll('.section-bg img, .carousel-bg');
-              bgImages.forEach(img => {
-                  if (img.complete) {
-                      img.classList.add('loaded');
-                      img.parentElement.classList.add('loaded');
-                  } else {
-                      img.addEventListener('load', function() {
-                          this.classList.add('loaded');
-                          this.parentElement.classList.add('loaded');
-                      });
-                  }
-              });
-          }
-        
-          lazyLoadBackgrounds();
-        
-          // Initialize Core Values Timeline Animation
-          initValuesTimeline();
-      });
-      // Initialize AOS with performance optimizations
-      document.addEventListener('DOMContentLoaded', function() {
-          AOS.init({
-              duration: 800,
-              once: true,
-              offset: 100,
-              easing: 'ease-out-cubic',
-              disable: window.innerWidth < 768 // Disable on mobile for performance
-          });
-      });
-    
-      // Initialize Core Values Timeline Animation
-      function initValuesTimeline() {
-          const timelineItems = document.querySelectorAll('.value-timeline-item');
-        
-          const observer = new IntersectionObserver((entries) => {
-              entries.forEach(entry => {
-                  if (entry.isIntersecting) {
-                      entry.target.classList.add('visible');
-                      observer.unobserve(entry.target);
-                  }
-              });
-          }, {
-              threshold: 0.3,
-              rootMargin: '0px 0px -100px 0px'
-          });
-        
-          timelineItems.forEach(item => {
-              observer.observe(item);
-          });
-      }
-    
-      // Throttled scroll handler for performance
-      let scrollTimeout;
-      window.addEventListener('scroll', function() {
-          if (!scrollTimeout) {
-              scrollTimeout = setTimeout(function() {
-                  handleScroll();
-                  scrollTimeout = null;
-              }, 10); // Throttle to 10ms
-          }
-      });
-    
-      function handleScroll() {
-          const navbar = document.querySelector('.navbar');
-          if (window.scrollY > 50) {
-              navbar.classList.add('scrolled');
-          } else {
-              navbar.classList.remove('scrolled');
-          }
-        
-          // Scroll progress indicator
-          const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-          const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-          const scrolled = (winScroll / height) * 100;
-          document.querySelector('.scroll-progress').style.width = scrolled + '%';
-      }
-    
-      // Optimized Hero Carousel with requestAnimationFrame
-      class HeroCarousel {
-          constructor() {
-              this.currentSlide = 0;
-              this.slides = document.querySelectorAll('.carousel-item');
-              this.dots = document.querySelectorAll('.carousel-dot');
-              this.progressBar = document.getElementById('carouselProgress');
-              this.autoSlideInterval = null;
-              this.slideDuration = 5000; // 5 seconds per slide
-              this.isPaused = false;
-              this.rafId = null;
-            
-              this.init();
-          }
-        
-          init() {
-              // Show first slide
-              this.showSlide(0);
-            
-              // Start auto slide
-              this.startAutoSlide();
-            
-              // Add click handlers to dots
-              this.dots.forEach((dot, index) => {
-                  dot.addEventListener('click', () => {
-                      this.goToSlide(index);
-                  });
-              });
-            
-              // Pause auto slide on hover
-              const carousel = document.querySelector('.hero-carousel');
-              carousel.addEventListener('mouseenter', () => {
-                  this.pauseAutoSlide();
-              });
-            
-              carousel.addEventListener('mouseleave', () => {
-                  if (!this.isPaused) {
-                      this.startAutoSlide();
-                  }
-              });
-          }
-        
-          startAutoSlide() {
-              if (this.autoSlideInterval) {
-                  clearInterval(this.autoSlideInterval);
-              }
-            
-              this.autoSlideInterval = setInterval(() => {
-                  this.nextSlide();
-              }, this.slideDuration);
-            
-              // Start progress bar animation
-              this.startProgressBar();
-          }
-        
-          pauseAutoSlide() {
-              if (this.autoSlideInterval) {
-                  clearInterval(this.autoSlideInterval);
-                  this.autoSlideInterval = null;
-                  this.pauseProgressBar();
-              }
-          }
-        
-          nextSlide() {
-              let nextSlide = this.currentSlide + 1;
-              if (nextSlide >= this.slides.length) {
-                  nextSlide = 0;
-              }
-              this.goToSlide(nextSlide);
-          }
-        
-          goToSlide(slideIndex) {
-              // Cancel any pending animation frame
-              if (this.rafId) {
-                  cancelAnimationFrame(this.rafId);
-              }
-            
-              // Use requestAnimationFrame for smooth transition
-              this.rafId = requestAnimationFrame(() => {
-                  // Reset progress bar
-                  this.resetProgressBar();
-                
-                  // Hide current slide
-                  this.slides[this.currentSlide].classList.remove('active');
-                  this.dots[this.currentSlide].classList.remove('active');
-                
-                  // Remove any animation classes
-                  this.slides[this.currentSlide].querySelectorAll('[class*="slide-in-"]').forEach(element => {
-                      element.classList.remove('slide-in-right', 'slide-in-left', 'slide-in-up');
-                  });
-                
-                  // Set new slide
-                  this.currentSlide = slideIndex;
-                
-                  // Show new slide
-                  this.showSlide(slideIndex);
-                
-                  // Start new progress bar
-                  this.startProgressBar();
-                
-                  // Restart auto slide if not paused
-                  if (!this.autoSlideInterval && !this.isPaused) {
-                      this.startAutoSlide();
-                  }
-              });
-          }
-        
-          showSlide(slideIndex) {
-              const slide = this.slides[slideIndex];
-              const dot = this.dots[slideIndex];
-            
-              // Show slide and activate dot
-              slide.classList.add('active');
-              dot.classList.add('active');
-            
-              // Add entrance animations with requestAnimationFrame
-              const contentElements = slide.querySelectorAll('[class*="slide-in-"]');
-              contentElements.forEach(element => {
-                  const animationClass = Array.from(element.classList).find(cls =>
-                      cls.startsWith('slide-in-')
-                  );
-                  const delay = element.getAttribute('data-delay') || 0;
-                
-                  // Reset animation
-                  element.style.animation = 'none';
-                
-                  // Use requestAnimationFrame to ensure proper rendering
-                  requestAnimationFrame(() => {
-                      setTimeout(() => {
-                          requestAnimationFrame(() => {
-                              element.style.animation = '';
-                              element.classList.add(animationClass);
-                          });
-                      }, parseInt(delay));
-                  });
-              });
-          }
-        
-          startProgressBar() {
-              this.progressBar.style.transition = 'width 5s linear';
-              this.progressBar.style.width = '100%';
-            
-              // Reset progress bar when animation completes
-              setTimeout(() => {
-                  this.progressBar.style.transition = 'none';
-                  this.progressBar.style.width = '0%';
-              }, this.slideDuration);
-          }
-        
-          pauseProgressBar() {
-              const computedStyle = window.getComputedStyle(this.progressBar);
-              const currentWidth = computedStyle.getPropertyValue('width');
-              this.progressBar.style.transition = 'none';
-              this.progressBar.style.width = currentWidth;
-          }
-        
-          resetProgressBar() {
-              this.progressBar.style.transition = 'none';
-              this.progressBar.style.width = '0%';
-          }
-      }
-    
-      // Initialize carousel when DOM is loaded
-      document.addEventListener('DOMContentLoaded', () => {
-          const carousel = new HeroCarousel();
-        
-          // Expose carousel for debugging if needed
-          window.carousel = carousel;
-      });
-    
-      // Optimized smooth scrolling
-      const smoothScroll = (targetId) => {
-          const targetElement = document.querySelector(targetId);
-          if (targetElement) {
-              const targetPosition = targetElement.offsetTop - 80;
-              const startPosition = window.pageYOffset;
-              const distance = targetPosition - startPosition;
-              const duration = 500;
-              let start = null;
-            
-              const step = (timestamp) => {
-                  if (!start) start = timestamp;
-                  const progress = timestamp - start;
-                  const percentage = Math.min(progress / duration, 1);
-                
-                  window.scrollTo(0, startPosition + (distance * percentage));
-                
-                  if (progress < duration) {
-                      requestAnimationFrame(step);
-                  }
-              };
-            
-              requestAnimationFrame(step);
-          }
-      };
-    
-      // Attach smooth scrolling to all anchor links
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-          anchor.addEventListener('click', function(e) {
-              e.preventDefault();
-              const targetId = this.getAttribute('href');
-              if (targetId === '#') return;
-            
-              smoothScroll(targetId);
-          });
-      });
-    
-      // Optimized animated counter with Intersection Observer
-      function animateCounter() {
-          const counters = document.querySelectorAll('.stat-number');
-        
-          counters.forEach(counter => {
-              const target = parseInt(counter.getAttribute('data-count'));
-              const duration = 1000; // 1 second
-              const step = 20; // Update every 20ms
-              const increment = target / (duration / step);
-              let current = 0;
-            
-              const timer = setInterval(() => {
-                  current += increment;
-                  if (current >= target) {
-                      counter.textContent = target + (counter.textContent.includes('%') ? '%' : '+');
-                      clearInterval(timer);
-                  } else {
-                      counter.textContent = Math.floor(current) + (counter.textContent.includes('%') ? '%' : '+');
-                  }
-              }, step);
-          });
-      }
-    
-      // Trigger counter when stats section is in view
-      const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                  animateCounter();
-                  observer.unobserve(entry.target);
-              }
-          });
-      }, { threshold: 0.3 }); // Reduced threshold for better performance
-    
-      observer.observe(document.querySelector('#stats'));
-    
-      // Optimized navbar active state update
-      const sections = document.querySelectorAll('section');
-      const navLinks = document.querySelectorAll('.nav-link');
-    
-      // Throttle the scroll handler for navbar updates
-      let navScrollTimeout;
-      window.addEventListener('scroll', () => {
-          if (!navScrollTimeout) {
-              navScrollTimeout = setTimeout(() => {
-                  updateNavbarActiveState();
-                  navScrollTimeout = null;
-              }, 50); // Update every 50ms
-          }
-      });
-    
-      function updateNavbarActiveState() {
-          let current = '';
-          const scrollPosition = window.scrollY + 100;
-        
-          sections.forEach(section => {
-              const sectionTop = section.offsetTop;
-              const sectionHeight = section.clientHeight;
-              if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                  current = section.getAttribute('id');
-              }
-          });
-        
-          navLinks.forEach(link => {
-              link.classList.remove('active');
-              if (link.getAttribute('href').substring(1) === current) {
-                  link.classList.add('active');
-              }
-          });
-      }
-    
-      // Form submission handlers
-      document.querySelectorAll('.btn-gold').forEach(button => {
-          if (button.getAttribute('href') === '#' || !button.getAttribute('href')) {
-              button.addEventListener('click', function(e) {
-                  e.preventDefault();
-                  const text = this.innerText.toLowerCase();
-                  if (text.includes('career') || text.includes('program') || text.includes('journey')) {
-                      alert('Thank you for your interest! You would be redirected to student registration.');
-                  } else if (text.includes('hire') || text.includes('talent') || text.includes('demo')) {
-                      alert('Thank you for your interest! You would be redirected to company registration.');
-                  } else {
-                      alert('Thank you for your interest! This feature would connect to your backend.');
-                  }
-              });
-          }
-      });
-    
-      // Newsletter form submission
-      const newsletterBtn = document.querySelector('.footer .btn-gold');
-      if (newsletterBtn) {
-          newsletterBtn.addEventListener('click', function(e) {
-              e.preventDefault();
-              const emailInput = this.closest('.input-group').querySelector('input[type="email"]');
-              if (emailInput.value && emailInput.checkValidity()) {
-                  alert('Thank you for subscribing to our newsletter!');
-                  emailInput.value = '';
-              } else {
-                  alert('Please enter a valid email address.');
-              }
-          });
-      }
-    
-      // Performance monitoring
-      if ('performance' in window) {
-          window.addEventListener('load', () => {
-              const timing = performance.timing;
-              const loadTime = timing.loadEventEnd - timing.navigationStart;
-              console.log(`Page loaded in ${loadTime}ms`);
-          });
-      }
-    
-      // Debounced resize handler
-      let resizeTimeout;
-      window.addEventListener('resize', () => {
-          clearTimeout(resizeTimeout);
-          resizeTimeout = setTimeout(() => {
-              // Reinitialize AOS on mobile if needed
-              if (window.innerWidth >= 768) {
-                  AOS.refresh();
-              }
-          }, 250);
-      });
-  </script>
-</body>
-</html>
+<div class="relative z-10 max-w-4xl mt-20">
+<div class="inline-flex items-center gap-base px-md py-1.5 rounded-full border border-primary/30 bg-primary/5 text-primary font-label-sm text-label-sm mb-lg premium-blur tracking-wider uppercase">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                The Gold Standard for Campus Placements
+            </div>
+<h1 class="font-display-lg text-[36px] md:text-[56px] leading-[1.2] md:leading-[64px] mb-lg text-on-surface font-semibold tracking-tight hero-text-shadow">
+                Transform Your Campus Placements <br class="hidden md:block"/> Into A <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-[#ffe088] to-primary">Premium Digital Experience</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface/70 max-w-2xl mx-auto mb-xl md:text-[18px] leading-relaxed">
+                Streamline complex recruitment workflows with obsidian clarity. A unified ecosystem engineered for elite TPOs, students, and global recruiters.
+            </p>
+<!-- <div class="flex flex-col sm:flex-row items-center justify-center gap-lg mb-xxl">
+<button class="gold-gradient-btn text-on-primary font-label-md text-[15px] px-xl py-4 rounded-xl font-bold w-full sm:w-auto shadow-[0_10px_30px_rgba(212,175,55,0.2)] hover:shadow-[0_15px_40px_rgba(212,175,55,0.3)] hover:-translate-y-0.5 transition-all active:translate-y-0">
+                    Launch Platform
+                </button>
+<button class="ghost-border bg-white/5 hover:bg-white/10 text-on-surface font-label-md text-[15px] px-xl py-4 rounded-xl w-full sm:w-auto transition-all backdrop-blur-sm border-white/10 hover:border-white/30">
+                    Explore Features
+                </button>
+</div> -->
+<!-- Redesigned Stats Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-xl max-w-3xl mx-auto py-lg px-xl glass-card rounded-2xl border-white/5">
+<div class="flex flex-col items-center">
+<span class="text-headline-lg text-primary font-bold tracking-tight">10K+</span>
+<span class="text-[11px] font-semibold text-on-surface-variant uppercase tracking-[0.2em] mt-1">Active Students</span>
+</div>
+<div class="flex flex-col items-center border-y md:border-y-0 md:border-x border-white/10 py-md md:py-0">
+<span class="text-headline-lg text-primary font-bold tracking-tight">500+</span>
+<span class="text-[11px] font-semibold text-on-surface-variant uppercase tracking-[0.2em] mt-1">Placement Drives</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="text-headline-lg text-primary font-bold tracking-tight">98%</span>
+<span class="text-[11px] font-semibold text-on-surface-variant uppercase tracking-[0.2em] mt-1">Efficiency Rate</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Platform Preview -->
+<section class="py-xxl px-margin max-w-[1440px] mx-auto">
+<div class="text-center max-w-3xl mx-auto mb-xxl">
+
+    <div class="inline-flex items-center gap-xs px-md py-2 rounded-full 
+                border border-primary/20 bg-primary/5 text-primary 
+                text-label-sm font-semibold tracking-[0.18em] uppercase mb-lg">
+
+        <span class="material-symbols-outlined text-[16px]">
+            diamond
+        </span>
+
+        Platform Ecosystem
+
+    </div>
+
+    <h2 class="font-display-lg text-[34px] md:text-[46px] 
+               leading-tight tracking-tight text-on-surface mb-md">
+
+        Engineered for 
+        <span class="text-transparent bg-clip-text bg-gradient-to-r 
+                     from-primary via-[#ffe088] to-primary">
+            Every Stakeholder
+        </span>
+
+    </h2>
+
+    <p class="font-body-lg text-on-surface-variant 
+              leading-relaxed max-w-2xl mx-auto text-[17px]">
+
+        A premium modular ecosystem designed to empower administrators,
+        placement officers, recruiters, and students through a seamless,
+        intelligent placement experience.
+
+    </p>
+
+    <div class="w-24 h-1 bg-primary mx-auto rounded-full mt-lg"></div>
+
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- TPO Portal -->
+<div class="glass-card p-xl rounded-xl group hover:border-primary/30 transition-all duration-300 flex flex-col items-center text-center">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-lg">
+<span class="material-symbols-outlined text-primary" data-icon="hub">hub</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-sm">TPO Portal</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-lg leading-relaxed">Centralized command center for managing corporate relations and schedule optimization.</p>
+<div class="h-1 w-0 bg-primary group-hover:w-full transition-all duration-500 rounded-full"></div>
+</div>
+<!-- Student Portal -->
+<div class="glass-card p-xl rounded-xl group hover:border-primary/30 transition-all duration-300 flex flex-col items-center text-center">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-lg">
+<span class="material-symbols-outlined text-primary" data-icon="person">person</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Student Portal</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-lg leading-relaxed">Personalized career dashboard with resume builders and real-time application tracking.</p>
+<div class="h-1 w-0 bg-primary group-hover:w-full transition-all duration-500 rounded-full"></div>
+</div>
+<!-- Admin Panel -->
+<div class="glass-card p-xl rounded-xl group hover:border-primary/30 transition-all duration-300 flex flex-col items-center text-center">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-lg">
+<span class="material-symbols-outlined text-primary" data-icon="admin_panel_settings">admin_panel_settings</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Admin Panel</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-lg leading-relaxed">High-level institutional governance, user role management, and security protocols.</p>
+<div class="h-1 w-0 bg-primary group-hover:w-full transition-all duration-500 rounded-full"></div>
+</div>
+<!-- Analytics -->
+<div class="glass-card p-xl rounded-xl group hover:border-primary/30 transition-all duration-300 flex flex-col items-center text-center">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-lg">
+<span class="material-symbols-outlined text-primary" data-icon="bar_chart">bar_chart</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Analytics</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-lg leading-relaxed">Predictive insights and comprehensive placement reports generated in real-time.</p>
+<div class="h-1 w-0 bg-primary group-hover:w-full transition-all duration-500 rounded-full"></div>
+</div>
+</div>
+</section>
+<!-- Features Grid -->
+<section class="py-xxl bg-surface-container-lowest/50">
+<div class="max-w-[1440px] mx-auto px-margin">
+<div class="text-center mb-xxl">
+<h2 class="font-headline-xl text-headline-xl text-on-surface mb-md">Precision Tools for Modern Talent Teams</h2>
+<div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-xl">
+<!-- Feature 1 -->
+<div class="flex gap-lg p-lg rounded-xl hover:bg-white/5 transition-all">
+<div class="shrink-0">
+<span class="material-symbols-outlined text-[40px] text-primary" data-icon="event_available">event_available</span>
+</div>
+<div>
+<h4 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Drive Management</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Automate scheduling, corporate outreach, and venue logistics with intelligent calendar synchronization.</p>
+</div>
 
 
+</div>
+<!-- Feature 2 -->
+<div class="flex gap-lg p-lg rounded-xl hover:bg-white/5 transition-all">
+<div class="shrink-0">
+<span class="material-symbols-outlined text-[40px] text-primary" data-icon="group_work">group_work</span>
+</div>
+<div>
+<h4 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Student Management</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage vast student databases with granular filters based on academic performance and skill sets.</p>
+</div>
+</div>
+<!-- Feature 3 -->
+<div class="flex gap-lg p-lg rounded-xl hover:bg-white/5 transition-all">
+<div class="shrink-0">
+<span class="material-symbols-outlined text-[40px] text-primary" data-icon="description">description</span>
+</div>
+<div>
+<h4 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Resume Workflows</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Standardized resume generation with AI-driven screening and bulk download capabilities for recruiters.</p>
+</div>
+</div>
+<!-- Feature 4 -->
+<div class="flex gap-lg p-lg rounded-xl hover:bg-white/5 transition-all">
+<div class="shrink-0">
+<span class="material-symbols-outlined text-[40px] text-primary" data-icon="insights">insights</span>
+</div>
+<div>
+<h4 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Advanced Analytics</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Visual intelligence on placement trends, recruiter behavior, and student preparedness metrics.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Portal Access -->
+<section class="py-xxl px-margin max-w-[1440px] mx-auto">
+<h2 class="font-headline-xl text-headline-xl text-on-surface mb-xxl text-center">Secure Portal Entry</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-xl">
+<!-- Admin Login -->
+<div class="glass-card rounded-2xl overflow-hidden flex flex-col">
+<img alt="High-tech futuristic data center architecture" class="w-full h-48 object-cover opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvkD4FdntBjU4ROCqdov1zM1k8je8DsmXwFx7D5T0GfCvirGojvS8hI_tZ_YUYRLAUnLqB_hEZ2nbyzqO1sYdflFqGwQrk1qYwaux4uT8wGhrUBdcWhGnV7GAMLKzBJv90himtc53e3L8yQMjQlyyTxDwhbsuhQ9gNl0IOStb1tM9Aqa-X1mgt-bD5G5AbZQFMbqqkAlUSLAD4F0Ui1KMU-w8IVFyaFQuywD5TaW5e0oe5WD7L6dPIVooDEK8XTKQO6K77XQBLkYNR"/>
+<div class="p-xl flex-grow flex flex-col">
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Administrator</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-xl flex-grow">Institutional level control, system configuration, and data auditing.</p>
+<a class="inline-flex items-center gap-xs text-primary font-label-md text-label-md hover:gap-md transition-all group" href="/admin/login">
+                        Login as Admin <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- TPO Login -->
+<div class="glass-card rounded-2xl overflow-hidden flex flex-col border-primary/20 bg-primary/5">
+<img alt="Premium workspace with sleek laptop and gold accents" class="w-full h-48 object-cover opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBejK8xFdOUnrEDvDq7XFoWaaURap_wKLinD8vAfqRs8ahy6yB6bxqF3oMdJOBWUWE8_-SXDFQzCjnNd8xboA__5C6Mh6ycrcCdkeIe0DAYWXOSJaib5Ek29S6nXgth9ThCuWyCTWxIgnjBWKsS6-VskXK-CeDWcJL6QA3TKRbQz8fBW1KUp9STec3_CigVkdhWLrgcINfbE64IWxeZ767EsOiUHlqEE3t5OuZAnUwFN_fsjsbblqMHPovXXwgIq62z4ZCQU-SCTmVk"/>
+<div class="p-xl flex-grow flex flex-col">
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Placement Officer</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-xl flex-grow">Manage drives, recruiter communications, and student placement journeys.</p>
+<a class="inline-flex items-center gap-xs text-primary font-label-md text-label-md hover:gap-md transition-all group" href="/tpo/login">
+                        Login as TPO <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Student Login -->
+<div class="glass-card rounded-2xl overflow-hidden flex flex-col">
+<img alt="Modern mobile app placement dashboard" class="w-full h-48 object-cover opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaufJ3B4ueQTUuKQaUQNJ-EsdHlnyGKzsfkPjYBsSAhnHcovbeVzzRyD91Rgb68bDH0-91Ua4kdH3PY5ROY1R_g-PA9A_xRosvh2bOBv_h31X8x2Ag5m1ikpbZkrUL4YzZta2lCDeU2IR_5aOVntqFhRk2vZbP8DTq04X5r2AYaMMnWtWu3llTtluXa3cVXYt2RaOqfXK4Q_tQdyTkP6qzoYYabF196_YwPUulpG8ZBWpsoNQTUIDhHfz7FlB_a6gQcBidMvoxMca3"/>
+<div class="p-xl flex-grow flex flex-col">
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Student</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-xl flex-grow">Access job opportunities, build resumes, and track your interview status.</p>
+<a class="inline-flex items-center gap-xs text-primary font-label-md text-label-md hover:gap-md transition-all group" href="/student/login">
+                        Login as Student <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Box -->
+<section class="py-xxl px-margin">
+<div class="max-w-[1200px] mx-auto rounded-[32px] overflow-hidden relative p-xxl text-center border border-primary/20">
+<div class="absolute inset-0 bg-primary/5 backdrop-blur-md -z-10"></div>
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/20 blur-[100px] rounded-full"></div>
+<div class="absolute -bottom-24 -left-24 w-64 h-64 bg-primary/10 blur-[100px] rounded-full"></div>
+<h2 class="font-headline-xl text-[40px] leading-tight text-on-surface mb-md">Ready To Modernize Campus Recruitment?</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-xl">
+                Join the ranks of elite institutions leveraging Amentrop to deliver world-class placement experiences.
+            </p>
 
+</div>
+</section>
+</main>
+<!-- Redesigned Footer: High-end Simplified Two-Column Layout -->
+<!-- Premium Footer -->
+<footer class="bg-[#0B0B0B] text-on-surface border-t border-white/5 pt-xxl pb-lg relative overflow-hidden">
+
+    <!-- Glow Effects -->
+    <div class="absolute top-0 left-0 w-72 h-72 bg-primary/10 blur-[120px] rounded-full"></div>
+    <div class="absolute bottom-0 right-0 w-72 h-72 bg-primary/5 blur-[120px] rounded-full"></div>
+
+    <div class="max-w-[1440px] mx-auto px-margin relative z-10">
+
+        <!-- Top Footer Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-xxl mb-xxl">
+
+            <!-- Brand -->
+            <div>
+                <span class="font-display-lg text-headline-xl font-bold text-primary tracking-tighter mb-lg block">
+                    Amentrop
+                </span>
+
+                <p class="text-on-surface-variant font-body-md leading-relaxed mb-lg">
+                    A premium placement ecosystem crafted for modern institutions,
+                    elite recruiters, and ambitious students. Simplifying campus
+                    hiring with intelligence, automation, and elegance.
+                </p>
+
+                <div class="flex items-center gap-md mt-5">
+
+                    <a class="w-10 h-10 rounded-lg border border-white/10 bg-white/5 flex items-center justify-center hover:bg-primary/10 hover:border-primary/30 hover:text-primary transition-all"
+                        href="#">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                            <path
+                                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z">
+                            </path>
+                        </svg>
+                    </a>
+
+                    <a class="w-10 h-10 rounded-lg border border-white/10 bg-white/5 flex items-center justify-center hover:bg-primary/10 hover:border-primary/30 hover:text-primary transition-all"
+                        href="#">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                            <path
+                                d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z">
+                            </path>
+                        </svg>
+                    </a>
+
+                    <a class="w-10 h-10 rounded-lg border border-white/10 bg-white/5 flex items-center justify-center hover:bg-primary/10 hover:border-primary/30 hover:text-primary transition-all"
+                        href="#">
+                        <span class="material-symbols-outlined text-[20px]">language</span>
+                    </a>
+
+                </div>
+            </div>
+
+            <!-- Platform -->
+            <div>
+                <h4
+                    class="text-on-surface font-label-md uppercase tracking-[0.18em] mb-lg text-[13px]">
+                    Platform
+                </h4>
+
+                <div class="flex flex-col gap-md text-body-sm">
+                    <a href="#"
+                        class="text-on-surface-variant hover:text-primary transition-colors">
+                        Features
+                    </a>
+
+                    <a href="#"
+                        class="text-on-surface-variant hover:text-primary transition-colors">
+                        Analytics
+                    </a>
+
+                    <a href="#"
+                        class="text-on-surface-variant hover:text-primary transition-colors">
+                        Placement Drives
+                    </a>
+
+                    <a href="#"
+                        class="text-on-surface-variant hover:text-primary transition-colors">
+                        Resume System
+                    </a>
+                </div>
+            </div>
+
+            <!-- Login Portals -->
+            <div>
+                <h4
+                    class="text-on-surface font-label-md uppercase tracking-[0.18em] mb-lg text-[13px]">
+                    Portal Access
+                </h4>
+
+                <div class="flex flex-col gap-md">
+
+                    <a href="/admin/login"
+                        class="group flex items-center justify-between px-md py-3 rounded-xl bg-white/5 border border-white/5 hover:border-primary/30 hover:bg-primary/5 transition-all">
+
+                        <div class="flex items-center gap-sm">
+                            <span class="material-symbols-outlined text-primary text-[20px]">
+                                admin_panel_settings
+                            </span>
+
+                            <span class="text-body-sm text-on-surface">
+                                Admin Login
+                            </span>
+                        </div>
+
+                        <span
+                            class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-all">
+                            arrow_forward
+                        </span>
+                    </a>
+
+                    <a href="/tpo/login"
+                        class="group flex items-center justify-between px-md py-3 rounded-xl bg-white/5 border border-white/5 hover:border-primary/30 hover:bg-primary/5 transition-all">
+
+                        <div class="flex items-center gap-sm">
+                            <span class="material-symbols-outlined text-primary text-[20px]">
+                                business_center
+                            </span>
+
+                            <span class="text-body-sm text-on-surface">
+                                TPO Login
+                            </span>
+                        </div>
+
+                        <span
+                            class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-all">
+                            arrow_forward
+                        </span>
+                    </a>
+
+                    <a href="/student/login"
+                        class="group flex items-center justify-between px-md py-3 rounded-xl bg-white/5 border border-white/5 hover:border-primary/30 hover:bg-primary/5 transition-all">
+
+                        <div class="flex items-center gap-sm">
+                            <span class="material-symbols-outlined text-primary text-[20px]">
+                                school
+                            </span>
+
+                            <span class="text-body-sm text-on-surface">
+                                Student Login
+                            </span>
+                        </div>
+
+                        <span
+                            class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-all">
+                            arrow_forward
+                        </span>
+                    </a>
+
+                </div>
+            </div>
+
+            <!-- Contact -->
+            <div>
+                <h4
+                    class="text-on-surface font-label-md uppercase tracking-[0.18em] mb-lg text-[13px]">
+                    Contact
+                </h4>
+
+                <div class="flex flex-col gap-md text-body-sm">
+
+                    <div class="flex items-center gap-sm text-on-surface-variant">
+                        <span class="material-symbols-outlined text-primary text-[18px]">
+                            mail
+                        </span>
+                        support@amentrop.com
+                    </div>
+
+                    <div class="flex items-center gap-sm text-on-surface-variant">
+                        <span class="material-symbols-outlined text-primary text-[18px]">
+                            call
+                        </span>
+                        +91 98765 43210
+                    </div>
+
+                    <div class="flex items-start gap-sm text-on-surface-variant">
+                        <span class="material-symbols-outlined text-primary text-[18px] mt-1">
+                            location_on
+                        </span>
+                        Bengaluru, India
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Bar -->
+        <div
+            class="border-t border-white/5 pt-lg flex flex-col md:flex-row items-center justify-between gap-md">
+
+            <p class="font-body-sm text-on-surface-variant/60 tracking-wide">
+                © 2026 Amentrop. All rights reserved.
+            </p>
+
+            <div class="flex items-center gap-lg text-body-sm">
+
+                <a href="#"
+                    class="text-on-surface-variant hover:text-primary transition-colors">
+                    Privacy Policy
+                </a>
+
+                <a href="#"
+                    class="text-on-surface-variant hover:text-primary transition-colors">
+                    Terms
+                </a>
+
+                <a href="#"
+                    class="text-on-surface-variant hover:text-primary transition-colors">
+                    Security
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+</body></html>

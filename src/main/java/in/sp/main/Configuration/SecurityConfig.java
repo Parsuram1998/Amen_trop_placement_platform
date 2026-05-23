@@ -27,9 +27,10 @@ public class SecurityConfig {
                 .anyRequest().permitAll()   // allow all for now
             )
             .sessionManagement(session ->
-                session.invalidSessionUrl("/session-expired")
-            );
 
+            session.invalidSessionUrl("/")
+
+        );
         return http.build();
     }
 

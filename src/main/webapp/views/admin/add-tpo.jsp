@@ -2,6 +2,9 @@
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@ taglib prefix="c"
+    uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -9,7 +12,7 @@
 
 <meta charset="UTF-8">
 
-<title>Amentrop Admin Dashboard</title>
+<title>Add TPO</title>
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -71,7 +74,7 @@ body{
     font-size:13px;
 }
 
-/* SIDEBAR LINKS */
+/* MENU */
 
 .menu{
     display:flex;
@@ -97,12 +100,15 @@ body{
     transform:translateX(4px);
 }
 
-/* MAIN CONTENT */
+/* MAIN */
 
 .main{
     margin-left:260px;
     width:calc(100% - 260px);
     padding:35px;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
 }
 
 /* TOPBAR */
@@ -115,8 +121,8 @@ body{
 }
 
 .topbar h1{
-    font-size:32px;
     color:#d4af37;
+    font-size:30px;
 }
 
 .topbar p{
@@ -138,120 +144,109 @@ body{
     color:#d4af37;
 }
 
-/* STATS */
+/* FORM CARD */
 
-.stats{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
-    gap:16px;
-    margin-bottom:28px;
-}
-
-.stat-card{
-    background:#1a1a1a;
-    padding:18px 20px;
-    border-radius:14px;
-    border:1px solid #2a2a2a;
-    transition:0.3s;
-    position:relative;
-    overflow:hidden;
-    min-height:120px;
-}
-
-.stat-card:hover{
-    transform:translateY(-4px);
-    border-color:#d4af37;
-    box-shadow:0 8px 24px rgba(212,175,55,0.12);
-}
-
-.stat-card i{
-    font-size:20px;
-    color:#d4af37;
-    margin-bottom:12px;
-}
-
-.stat-card h2{
-    font-size:24px;
-    margin-bottom:5px;
-    font-weight:700;
-    color:white;
-}
-
-.stat-card p{
-    color:#bdbdbd;
-    font-size:13px;
-    letter-spacing:0.3px;
-}
-
-/* QUICK ACTIONS */
-
-.section-title{
-    margin-bottom:20px;
-    color:#d4af37;
-    font-size:24px;
-}
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:18px;
-}
-
-.card{
+.form-card{
+    width:100%;
+    max-width:650px;
     background:#1a1a1a;
     border:1px solid #2a2a2a;
-    padding:22px;
-    border-radius:16px;
-    transition:0.3s;
-    position:relative;
-    overflow:hidden;
+    border-radius:20px;
+    padding:35px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.35);
 }
 
-.card:hover{
-    transform:translateY(-4px);
-    border-color:#d4af37;
-    box-shadow:0 8px 24px rgba(212,175,55,0.12);
+.form-title{
+    margin-bottom:30px;
 }
 
-.card i{
-    font-size:24px;
+.form-title h2{
     color:#d4af37;
-    margin-bottom:14px;
-}
-
-.card h3{
     margin-bottom:8px;
-    font-size:18px;
 }
 
-.card p{
-    color:#bdbdbd;
-    font-size:13px;
-    line-height:1.6;
-    margin-bottom:18px;
+.form-title p{
+    color:#999;
+    font-size:14px;
 }
-.card a{
-    display:inline-block;
-    padding:12px 18px;
+
+/* FORM GROUP */
+
+.form-group{
+    margin-bottom:24px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:10px;
+    color:#ddd;
+    font-size:14px;
+}
+
+.input-box{
+    position:relative;
+}
+
+.input-box i{
+    position:absolute;
+    left:15px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#d4af37;
+    font-size:15px;
+}
+
+.input-box input,
+.input-box select{
+    width:100%;
+    padding:14px 14px 14px 45px;
+    background:#111111;
+    border:1px solid #2d2d2d;
+    border-radius:12px;
+    color:white;
+    font-size:15px;
+    outline:none;
+    transition:0.3s;
+}
+
+.input-box input:focus,
+.input-box select:focus{
+    border-color:#d4af37;
+    box-shadow:0 0 0 4px rgba(212,175,55,0.12);
+}
+
+.input-box select{
+    appearance:none;
+    cursor:pointer;
+}
+
+/* BUTTON */
+
+button{
+    width:100%;
+    padding:15px;
     background:#d4af37;
     color:black;
-    text-decoration:none;
-    border-radius:10px;
+    border:none;
+    border-radius:12px;
+    font-size:16px;
     font-weight:bold;
+    cursor:pointer;
     transition:0.3s;
 }
 
-.card a:hover{
+button:hover{
     background:#b8932f;
 }
 
 /* FOOTER */
 
 .footer{
-    margin-top:45px;
+    margin-top:auto;
+    padding-top:40px;
     color:#777;
+    font-size:13px;
     text-align:center;
-    font-size:14px;
 }
 
 </style>
@@ -323,10 +318,10 @@ body{
 
         <div>
 
-            <h1>Admin Dashboard</h1>
+            <h1>Add TPO</h1>
 
             <p>
-                Manage colleges, TPOs, placements and platform operations.
+                Create and assign Training & Placement Officers to colleges.
             </p>
 
         </div>
@@ -341,131 +336,104 @@ body{
 
     </div>
 
-    <!-- STATS -->
+    <!-- FORM -->
 
-    <div class="stats">
+    <div class="form-card">
 
-        <div class="stat-card">
+        <div class="form-title">
 
-            <i class="fa-solid fa-building-columns"></i>
-
-            <h2>${totalColleges}</h2>
-
-            <p>Total Colleges</p>
-
-        </div>
-
-        <div class="stat-card">
-
-            <i class="fa-solid fa-users"></i>
-
-            <h2>${totalTpos}</h2>
-
-            <p>Total TPOs</p>
-
-        </div>
-
-        <div class="stat-card">
-
-            <i class="fa-solid fa-user-graduate"></i>
-
-            <h2>${totalStudents}</h2>
-
-            <p>Total Students</p>
-
-        </div>
-
-        <div class="stat-card">
-
-            <i class="fa-solid fa-briefcase"></i>
-
-            <h2>${totalDrives}</h2>
-
-            <p>Total Placement Drives</p>
-
-        </div>
-
-    </div>
-
-    <!-- QUICK ACTIONS -->
-
-    <h2 class="section-title">
-        Quick Actions
-    </h2>
-
-    <div class="cards">
-
-        <div class="card">
-
-            <i class="fa-solid fa-building-columns"></i>
-
-            <h3>Add College</h3>
+            <h2>TPO Information</h2>
 
             <p>
-                Register and manage partner colleges on the platform.
+                Fill in the details below to onboard a new TPO.
             </p>
-
-            <a href="${pageContext.request.contextPath}/admin/add-college">
-
-                Open
-
-            </a>
 
         </div>
 
-        <div class="card">
+        <form action="${pageContext.request.contextPath}/admin/save-tpo"
+              method="post">
 
-            <i class="fa-solid fa-school"></i>
+            <!-- NAME -->
 
-            <h3>View Colleges</h3>
+            <div class="form-group">
 
-            <p>
-                Monitor subscriptions, details and college records.
-            </p>
+                <label>TPO Name</label>
 
-            <a href="${pageContext.request.contextPath}/admin/colleges">
+                <div class="input-box">
 
-                Open
+                    <i class="fa-solid fa-user"></i>
 
-            </a>
+                    <input type="text"
+                           name="name"
+                           placeholder="Enter TPO name"
+                           required>
 
-        </div>
+                </div>
 
-        <div class="card">
+            </div>
 
-            <i class="fa-solid fa-user-plus"></i>
+            <!-- EMAIL -->
 
-            <h3>Add TPO</h3>
+            <div class="form-group">
 
-            <p>
-                Create and assign placement officers for colleges.
-            </p>
+                <label>Email Address</label>
 
-            <a href="${pageContext.request.contextPath}/admin/add-tpo">
+                <div class="input-box">
 
-                Open
+                    <i class="fa-solid fa-envelope"></i>
 
-            </a>
+                    <input type="email"
+                           name="email"
+                           placeholder="Enter email address"
+                           required>
 
-        </div>
+                </div>
 
-        <div class="card">
+            </div>
 
-            <i class="fa-solid fa-users"></i>
+            <!-- COLLEGE -->
 
-            <h3>Manage TPOs</h3>
+            <div class="form-group">
 
-            <p>
-                View, filter, edit and manage TPO accounts efficiently.
-            </p>
+                <label>Select College</label>
 
-            <a href="${pageContext.request.contextPath}/admin/tpos">
+                <div class="input-box">
 
-                Open
+                    <i class="fa-solid fa-building-columns"></i>
 
-            </a>
+                    <select name="collegeId"
+                            required>
 
-        </div>
+                        <option value="">
+                            Choose College
+                        </option>
+
+                        <c:forEach var="college"
+                                   items="${colleges}">
+
+                            <option value="${college.id}">
+
+                                ${college.name}
+
+                            </option>
+
+                        </c:forEach>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <!-- BUTTON -->
+
+            <button type="submit">
+
+                Save TPO
+
+            </button>
+
+        </form>
 
     </div>
 

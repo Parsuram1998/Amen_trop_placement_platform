@@ -1,310 +1,380 @@
 package in.sp.main.Controllers;
 
-import java.io.File;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
-import in.sp.main.Entities.FresherProfile;
-import in.sp.main.Entities.HrCandidateSelection;
-import in.sp.main.Entities.Message;
-import in.sp.main.Entities.ProfessionalProfile;
-import in.sp.main.Entities.User;
-import in.sp.main.Enums.FresherStatus;
-import in.sp.main.Enums.HrCandidateStatus;
-import in.sp.main.Enums.Role;
-import in.sp.main.Repositories.FresherProfileRepository;
-import in.sp.main.Repositories.HrCandidateSelectionRepository;
-import in.sp.main.Repositories.JobApplicationRepository;
-import in.sp.main.Repositories.JobRepository;
-import in.sp.main.Repositories.MessageRepository;
-import in.sp.main.Repositories.ProfessionalProfileRepository;
-import in.sp.main.Repositories.UserRepository;
-import in.sp.main.Services.AdminDashboardService;
-import in.sp.main.Services.CertificateService;
+import in.sp.main.Entities.Admin;
+import in.sp.main.Entities.College;
+import in.sp.main.Entities.TPO;
+import in.sp.main.Repositories.AdminRepository;
+import in.sp.main.Repositories.CollegeRepository;
+import in.sp.main.Repositories.DriveRepository;
+import in.sp.main.Repositories.StudentRepository;
+import in.sp.main.Repositories.TPORepository;
+import in.sp.main.Services.EmailService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 
+	@Autowired
+	private StudentRepository studentRepository;
+	@Autowired
+	private DriveRepository driveRepository;
     @Autowired
-    private FresherProfileRepository fresherProfileRepository;
-    @Autowired
-    private AdminDashboardService adminDashboardService;
-    @Autowired
-    private ProfessionalProfileRepository professionalRepo;
-    @Autowired
-    private JobRepository jobRepo;
-    @Autowired
-    private JobApplicationRepository appRepo;
-    @Autowired
-    private CertificateService certificateService;
-    @Autowired
-    private MessageRepository messageRepo;
-    @Autowired
-    private UserRepository userRepo; 
-    @Autowired
-    private HrCandidateSelectionRepository selectionRepo;
+    private CollegeRepository collegeRepository;
 
-    @RequestMapping(value="/hr-feedback", method=RequestMethod.GET)
-    public String viewFeedback(Model model){
-
-        List<HrCandidateSelection> all = selectionRepo.findAll();
-
-        // Only rejected with feedback
-        List<HrCandidateSelection> feedbackList = all.stream()
-                .filter(s -> s.getStatus() == HrCandidateStatus.REJECTED)
-                .filter(s -> s.getFeedback() != null && !s.getFeedback().isEmpty())
-                .toList();
-
-        model.addAttribute("feedbackList", feedbackList);
-
-        return "admin/hr-feedback";
-    }
+    @Autowired
+    private TPORepository tpoRepository;
     
-    @RequestMapping(value="/dashboard", method=RequestMethod.GET)
-    public String dashboard(Model model){
+    @Autowired
+    private AdminRepository adminRepository;
 
-        model.addAttribute("totalFreshers", fresherProfileRepository.count());
+    @Autowired
+    private EmailService emailService;
+    
+    @GetMapping("/register")
+    public String registerPage() {
+        return "admin/register";
+    }
 
-        model.addAttribute("selectedFreshers",
-                fresherProfileRepository.countByStatus(FresherStatus.SELECTED));
+    @PostMapping("/register")
+    public String register(
+            @RequestParam String name,
+            @RequestParam String email,
+            @RequestParam String password
+    ) {
 
-        model.addAttribute("needsImprovement",
-                fresherProfileRepository.countByStatus(FresherStatus.NEEDS_IMPROVEMENT));
+        Admin admin = new Admin();
+        admin.setName(name);
+        admin.setEmail(email);
+        admin.setPassword(password);
 
-        model.addAttribute("totalProfessionals",
-                professionalRepo.count());
+        adminRepository.save(admin);
 
-        model.addAttribute("verifiedProfessionals",
-                professionalRepo.countByVerifiedTrue());
+        return "redirect:/admin/login";
+    }
 
-        model.addAttribute("totalJobs",
-                jobRepo.count());
+    // ---------------- LOGIN ----------------
 
-        model.addAttribute("totalApplications",
-                appRepo.count());
+    @GetMapping("/login")
+    public String loginPage() {
+        return "admin/login";
+    }
+
+    @PostMapping("/login")
+    public String login(
+            @RequestParam String email,
+            @RequestParam String password,
+            HttpSession session,
+            Model model
+    ) {
+
+        Admin admin =
+                adminRepository.findByEmailAndPassword(
+                        email,
+                        password
+                );
+
+        if (admin != null) {
+
+            session.setAttribute("admin", admin);
+
+            return "redirect:/admin/dashboard";
+        }
+
+        model.addAttribute(
+                "error",
+                "Invalid email or password"
+        );
+
+        return "admin/login";
+    }
+
+    // ---------------- DASHBOARD ----------------
+
+    @GetMapping("/dashboard")
+    public String dashboard(
+            HttpSession session,
+            Model model
+    ) {
+
+        if (session.getAttribute("admin") == null) {
+            return "redirect:/admin/login";
+        }
+
+        // 🔥 COUNTS
+        long totalColleges =
+                collegeRepository.count();
+
+        long totalTpos =
+                tpoRepository.count();
+
+        long totalStudents =
+                studentRepository.count();
+
+        long totalDrives =
+                driveRepository.count();
+
+        // 🔥 SEND TO JSP
+        model.addAttribute(
+                "totalColleges",
+                totalColleges
+        );
+
+        model.addAttribute(
+                "totalTpos",
+                totalTpos
+        );
+
+        model.addAttribute(
+                "totalStudents",
+                totalStudents
+        );
+
+        model.addAttribute(
+                "totalDrives",
+                totalDrives
+        );
+
+        return "admin/dashboard";
+    }
+    // Show Add College Page
+    @GetMapping("/add-college")
+    public String addCollegePage(HttpSession session) {
+
+        if (session.getAttribute("admin") == null) {
+            return "redirect:/admin/login";
+        }
+
+        return "admin/add-college";
+    }
+
+    // Save College
+    @PostMapping("/save-college")
+    public String saveCollege(
+            @RequestParam String name,
+            @RequestParam String startDate,
+            @RequestParam String endDate
+    ) {
+
+        College college = new College();
+        college.setName(name);
+        college.setSubscriptionStart(LocalDate.parse(startDate));
+        college.setSubscriptionEnd(LocalDate.parse(endDate));
+        college.setActive(true);
+
+        collegeRepository.save(college);
+
+        return "redirect:/admin/dashboard";
+    }
+
+    // Show Add TPO Page
+    @GetMapping("/add-tpo")
+    public String addTpoPage(Model model) {
+        model.addAttribute("colleges", collegeRepository.findAll());
+        return "admin/add-tpo";
+    }
+
+    // Save TPO
+    @PostMapping("/save-tpo")
+    public String saveTpo(
+            @RequestParam String name,
+            @RequestParam String email,
+            @RequestParam Long collegeId,
+            HttpServletRequest request,
+            Model model
+    ) {
+
+        College college = collegeRepository.findById(collegeId).orElse(null);
+
+        String token = UUID.randomUUID().toString();
+
+        TPO tpo = new TPO();
+        tpo.setName(name);
+        tpo.setEmail(email);
+        tpo.setCollege(college);
+        tpo.setResetToken(token);
+
+        tpoRepository.save(tpo);
+
+        // 🔥 Dynamic URL
+        String baseUrl = request.getRequestURL().toString()
+                .replace(request.getRequestURI(), request.getContextPath());
+
+        String link = baseUrl + "/tpo/set-password?token=" + token;
+
+        emailService.sendPasswordSetupEmail(
+                tpo.getEmail(),
+                link
+        );
+
+        model.addAttribute(
+                "success",
+                "TPO added successfully. Password setup email sent."
+        );
 
         return "admin/dashboard";
     }
     
-    @RequestMapping(value="/freshers", method=RequestMethod.GET)
-    public String viewFreshers(
-            @RequestParam(defaultValue="0") int page,
-            @RequestParam(required=false) String status,
-            Model model) {
+    @GetMapping("/colleges")
+    public String viewColleges(
+            @RequestParam(defaultValue = "0") int page,
+            HttpSession session,
+            Model model
+    ) {
 
-        try {
-
-            PageRequest pageable = PageRequest.of(page,10);
-
-            Page<FresherProfile> fresherPage;
-
-            FresherStatus statusEnum = null;
-
-            if(status != null){
-                try {
-                    statusEnum = FresherStatus.valueOf(status);
-                } catch(Exception e){
-                    statusEnum = null;
-                }
-            }
-
-            if(statusEnum != null){
-                fresherPage = fresherProfileRepository.findByStatus(statusEnum,pageable);
-            }else{
-                fresherPage = fresherProfileRepository.findAll(pageable);
-            }
-
-            model.addAttribute("freshers",fresherPage.getContent());
-            model.addAttribute("currentPage",page);
-            model.addAttribute("totalPages",fresherPage.getTotalPages());
-
-            return "admin/freshers";
-
-        } catch (Exception e) {
-            e.printStackTrace();   // 🔥 THIS WILL PRINT FULL ERROR IN CONSOLE
-            throw e;               // rethrow so you still see error page
-        }
-    }
-
-    @RequestMapping(value="/update-status", method=RequestMethod.POST)
-    public String updateStatus(
-            @RequestParam Long id,
-            @RequestParam String status) {
-
-        FresherProfile profile =
-                fresherProfileRepository.findById(id).orElseThrow();
-        System.out.println("STATUS RECEIVED: " + status);
-        profile.setStatus(FresherStatus.valueOf(status));
-
-        fresherProfileRepository.save(profile);
-
-        return "redirect:/admin/freshers";
-    }
-    
-    @RequestMapping(value="/professionals", method=RequestMethod.GET)
-    public String viewProfessionals(
-            @RequestParam(defaultValue="0") int page,
-            Model model){
-
-        PageRequest pageable = PageRequest.of(page,10);
-
-        Page<ProfessionalProfile> professionalPage =
-                professionalRepo.findAll(pageable);
-
-        model.addAttribute("professionals", professionalPage.getContent());
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", professionalPage.getTotalPages());
-
-        return "admin/professionals";
-    }
-    
-    @RequestMapping(value="/verify-professional", method=RequestMethod.POST)
-    public String verifyProfessional(@RequestParam Long id){
-
-        ProfessionalProfile profile =
-                professionalRepo.findById(id).orElseThrow();
-
-        profile.setVerified(true);
-
-        professionalRepo.save(profile);
-
-        return "redirect:/admin/professionals";
-    }
-    
-    @RequestMapping(value="/upload-template", method=RequestMethod.POST)
-    public String uploadTemplate(@RequestParam MultipartFile file){
-
-        try {
-            File dir = new File("templates/");
-            if(!dir.exists()) dir.mkdirs();
-
-            file.transferTo(new File("templates/template.docx"));
-
-        } catch(Exception e){
-            e.printStackTrace();
+        if (session.getAttribute("admin") == null) {
+            return "redirect:/admin/login";
         }
 
-        return "redirect:/admin/dashboard";
-    }
-    
-    @RequestMapping(value="/generate-certificate", method=RequestMethod.GET)
-    public String generateCertificate(@RequestParam Long fresherId){
+        Pageable pageable = PageRequest.of(page, 5);
 
-        try {
+        Page<College> collegePage =
+                collegeRepository.findAll(pageable);
 
-            System.out.println("=== ADMIN TRIGGER CERTIFICATE ===");
-
-            FresherProfile profile = fresherProfileRepository.findById(fresherId).orElseThrow();
-
-            User user = profile.getUser();
-
-            String path = certificateService.generateCertificate(user);
-
-            System.out.println("Generated Path: " + path);
-
-            profile.setCertificatePath(path);
-            profile.setCertificateApproved(true);
-
-            fresherProfileRepository.save(profile);
-
-            System.out.println("=== DB SAVED SUCCESS ===");
-
-        } catch (Exception e) {
-            System.out.println("=== ERROR IN ADMIN CERTIFICATE ===");
-            e.printStackTrace(); 
-        }
-
-        return "redirect:/admin/freshers";
-    }
-    
-    @RequestMapping(value="/send-message", method=RequestMethod.POST)
-    public String sendMessage(@RequestParam(required=false) String clientName,
-                              @RequestParam String content,
-                              @RequestParam(required=false) List<Long> userIds){
-
-        String sender = (clientName != null && !clientName.isEmpty())
-                ? clientName
-                : "Amentrop Admin";
-
-        // ❗ IMPORTANT: If nothing selected → don't send
-        if(userIds == null || userIds.isEmpty()){
-            return "redirect:/admin/send-message?error=noUsersSelected";
-        }
-
-        List<User> users = userRepo.findAllById(userIds);
-
-        for(User u : users){
-            Message m = new Message();
-            m.setSenderName(sender);
-            m.setContent(content);
-            m.setReceiver(u);
-
-            messageRepo.save(m);
-        }
-
-        return "redirect:/admin/send-message?success=true";
-    }
-    
-    @RequestMapping(value="/send-message", method=RequestMethod.GET)
-    public String messagePage(Model model){
-
-        List<User> users = userRepo.findByRoleIn(
-                java.util.Arrays.asList(Role.FRESHER, Role.PROFESSIONAL)
+        model.addAttribute(
+                "colleges",
+                collegePage.getContent()
         );
 
-        model.addAttribute("users", users);
+        model.addAttribute("currentPage", page);
 
-        return "admin/message";
+        model.addAttribute(
+                "totalPages",
+                collegePage.getTotalPages()
+        );
+
+        return "admin/colleges";
     }
-    @RequestMapping(value="/approve-candidate", method=RequestMethod.GET)
-    public String approveCandidate(@RequestParam Long userId){
+    
+    @GetMapping("/tpos")
+    public String viewTpos(
+            @RequestParam(required = false) Long collegeId,
+            @RequestParam(defaultValue = "0") int page,
+            HttpSession session,
+            Model model
+    ) {
 
-        try {
-
-        	User user = userRepo.findById(userId)
-                    .orElseThrow(() -> new RuntimeException("User not found"));
-
-            if(user.getRole() == Role.FRESHER){
-
-            	FresherProfile fp = fresherProfileRepository.findByUser(user).orElse(null);
-
-                if(fp == null){
-                    System.out.println("Fresher profile NOT FOUND for user: " + userId);
-                    return "redirect:/admin/dashboard?error=profileNotFound";
-                }
-
-                fp.setApproved(true);
-                fresherProfileRepository.save(fp);
-
-            } else if(user.getRole() == Role.PROFESSIONAL){
-
-            	ProfessionalProfile pp = professionalRepo.findByUser(user).orElse(null);
-
-                if(pp == null){
-                    System.out.println("Professional profile NOT FOUND for user: " + userId);
-                    return "redirect:/admin/dashboard?error=profileNotFound";
-                }
-
-                pp.setApproved(true);
-                professionalRepo.save(pp);
-            }
-
-            return "redirect:/admin/dashboard?success=approved";
-
-        } catch (Exception e){
-            e.printStackTrace(); // 🔥 VERY IMPORTANT
-            return "redirect:/admin/dashboard?error=exception";
+        if (session.getAttribute("admin") == null) {
+            return "redirect:/admin/login";
         }
-    }
 
+        Pageable pageable = PageRequest.of(page, 5);
+
+        Page<TPO> tpoPage;
+
+        if (collegeId != null) {
+
+            tpoPage = tpoRepository
+                    .findByCollegeId(collegeId, pageable);
+
+        } else {
+
+            tpoPage = tpoRepository.findAll(pageable);
+        }
+
+        List<College> colleges = collegeRepository.findAll();
+
+        model.addAttribute("tpos", tpoPage.getContent());
+
+        model.addAttribute("colleges", colleges);
+
+        model.addAttribute("selectedCollegeId", collegeId);
+
+        model.addAttribute("currentPage", page);
+
+        model.addAttribute("totalPages",
+                tpoPage.getTotalPages());
+
+        return "admin/tpos";
+    }
+    
+    @GetMapping("/edit-tpo/{id}")
+    public String editTpoPage(@PathVariable Long id, Model model) {
+
+        TPO tpo = tpoRepository.findById(id).orElse(null);
+
+        List<College> colleges = collegeRepository.findAll();
+
+        model.addAttribute("tpo", tpo);
+        model.addAttribute("colleges", colleges);
+
+        return "admin/edit-tpo";
+    }
+    @PostMapping("/update-tpo")
+    public String updateTpo(TPO tpo) {
+
+        tpoRepository.save(tpo);
+
+        return "redirect:/admin/tpos";
+    }
+    @GetMapping("/delete-tpo/{id}")
+    public String deleteTpo(@PathVariable Long id) {
+
+        tpoRepository.deleteById(id);
+
+        return "redirect:/admin/tpos";
+    }
+    
+    @GetMapping("/edit-college/{id}")
+    public String editCollegePage(
+            @PathVariable Long id,
+            HttpSession session,
+            Model model
+    ) {
+
+        if (session.getAttribute("admin") == null) {
+            return "redirect:/admin/login";
+        }
+
+        College college = collegeRepository.findById(id).orElse(null);
+
+        model.addAttribute("college", college);
+
+        return "admin/edit-college";
+    }
+    
+    @PostMapping("/update-college")
+    public String updateCollege(
+            @RequestParam Long id,
+            @RequestParam String name,
+            @RequestParam String subscriptionEnd,
+            HttpSession session
+    ) {
+
+        if (session.getAttribute("admin") == null) {
+            return "redirect:/admin/login";
+        }
+
+        College college = collegeRepository.findById(id).orElse(null);
+
+        if (college != null) {
+
+            college.setName(name);
+
+            college.setSubscriptionEnd(
+                    LocalDate.parse(subscriptionEnd)
+            );
+
+            collegeRepository.save(college);
+        }
+
+        return "redirect:/admin/colleges";
+    }
 }
