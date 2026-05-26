@@ -31,7 +31,7 @@ public class EmailService {
                     "Welcome to Amentrop - Complete Your Account Setup"
             );
 
-            String content = """
+            String content = String.format("""
 
                 <div style="
                     background:#f4f6f9;
@@ -175,7 +175,7 @@ public class EmailService {
                                 color:#2042e3;
                                 font-size:13px;
                             ">
-                                """ + link + """
+                               
                             </p>
 
                             <!-- FOOTER -->
@@ -207,8 +207,8 @@ public class EmailService {
 
                 </div>
 
-                """;
-
+                
+""", link);
             helper.setText(content, true);
 
             mailSender.send(message);
