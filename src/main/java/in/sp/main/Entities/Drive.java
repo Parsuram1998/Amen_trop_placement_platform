@@ -40,6 +40,16 @@ public class Drive {
     @JoinColumn(name = "college_id")
     private College college;
 
+  private String companyLocation;
+    
+	public String getCompanyLocation() {
+	return companyLocation;
+}
+
+public void setCompanyLocation(String companyLocation) {
+	this.companyLocation = companyLocation;
+}
+
 	public Long getId() {
 		return id;
 	}

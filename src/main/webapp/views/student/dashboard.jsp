@@ -819,6 +819,7 @@ tr:hover{
                         <th>Role</th>
                         <th>Date</th>
                         <th>Status</th>
+                        <th>Action</th>
 
                     </tr>
 
@@ -826,6 +827,7 @@ tr:hover{
                                items="${drives}">
 
                         <tr>
+                        
 
                             <td>${d.companyName}</td>
 
@@ -883,7 +885,18 @@ tr:hover{
                                 </c:choose>
 
                             </td>
+<td>
 
+    <a class="btn btn-primary"
+       href="${pageContext.request.contextPath}/student/drive-details/${d.id}">
+
+        <i class="fa-solid fa-eye"></i>
+
+        View
+
+    </a>
+
+</td>
                         </tr>
 
                     </c:forEach>

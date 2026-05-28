@@ -715,6 +715,27 @@ button:hover{
 
                     </div>
 
+
+<div class="form-group">
+
+                        <label>
+
+                            Company Location
+
+                        </label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-location"></i>
+
+                            <input type="text"
+                                   name="companyLocation"
+                                   placeholder="Enter company location"
+                                   required>
+
+                        </div>
+
+                    </div>
                     <!-- ROLE -->
 
                     <div class="form-group">

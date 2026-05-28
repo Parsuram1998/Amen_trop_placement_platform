@@ -160,6 +160,8 @@ public class TPOController {
             @RequestParam double twelfthCriteria,
             @RequestParam double degreeCriteria,
             @RequestParam String driveDate,
+            @RequestParam String companyLocation,
+            
             HttpSession session
     ) {
 
@@ -180,7 +182,8 @@ public class TPOController {
         drive.setDriveDate(LocalDate.parse(driveDate));
         drive.setStatus("ONGOING");
         drive.setCollege(tpo.getCollege());
-
+        drive.setCompanyLocation(companyLocation);
+        
         driveRepository.save(drive);
 
         return "redirect:/tpo/drives";

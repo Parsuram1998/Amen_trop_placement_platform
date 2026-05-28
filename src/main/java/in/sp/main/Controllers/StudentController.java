@@ -274,4 +274,16 @@ public class StudentController {
 
         return "redirect:/student/dashboard";
     }
+    
+    @GetMapping("/drive-details/{id}")
+    public String driveDetails(
+            @PathVariable Long id,
+            Model model) {
+
+        Drive drive = driveRepository.findById(id).orElse(null);
+
+        model.addAttribute("drive", drive);
+
+        return "student/drive-details";
+    }
 }
